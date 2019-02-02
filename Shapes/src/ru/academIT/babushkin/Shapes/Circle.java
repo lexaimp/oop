@@ -13,17 +13,17 @@ public class Circle implements Shape {
     }
 
     @Override
-    public double getHeight(){
+    public double getHeight() {
         return radius * 2;
     }
 
     @Override
-    public double getArea(){
+    public double getArea() {
         return Math.PI * Math.pow(radius, 2);
     }
 
     @Override
-    public double getPerimeter(){
+    public double getPerimeter() {
         return Math.PI * radius;
     }
 }
