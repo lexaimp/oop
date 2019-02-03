@@ -15,5 +15,7 @@ public class Main {
         System.out.println(Arrays.toString(shapes));
         Arrays.sort(shapes, new PerimeterComparator());
         System.out.println(Arrays.toString(shapes));
+        System.out.println(triangle1.toString());
+
     }
 }

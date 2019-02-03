@@ -26,4 +26,26 @@ public class Square implements Shape {
     public double getPerimeter() {
         return lengthOfSide * 4;
     }
+
+    @Override
+    public String toString() {
+        return Double.toString(lengthOfSide);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+        Square square = (Square) o;
+        return square.lengthOfSide == lengthOfSide;
+    }
+
+    @Override
+    public int hashCode() {
+        return Double.hashCode(lengthOfSide);
+    }
 }
