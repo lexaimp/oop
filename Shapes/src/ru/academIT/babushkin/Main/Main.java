@@ -14,15 +14,16 @@ public class Main {
         Shape circle1 = new Circle(23.7);
 
         Shape[] shapes = {triangle1, rectangle1, rectangle2, square1, triangle2, circle1};
-        Shape MaxArea = getMaxArea(shapes);
-        System.out.println(MaxArea.toString());
-        System.out.println("Площадь: " + MaxArea.getArea());
-        System.out.println("Периметр: " + MaxArea.getPerimeter());
 
-        Shape secondForMaxPerimeter = getSecondForMaxPerimeter(shapes);
-        System.out.println(secondForMaxPerimeter.toString());
-        System.out.println("Площадь: " + secondForMaxPerimeter.getArea());
-        System.out.println("Периметр: " + secondForMaxPerimeter.getPerimeter());
+        Shape maxArea = getMaxArea(shapes);
+        System.out.println(maxArea.toString());
+        System.out.println("Площадь: " + maxArea.getArea());
+        System.out.println("Периметр: " + maxArea.getPerimeter());
+
+        Shape secondLargestPerimeter = getSecondLargestPerimeter(shapes);
+        System.out.println(secondLargestPerimeter.toString());
+        System.out.println("Площадь: " + secondLargestPerimeter.getArea());
+        System.out.println("Периметр: " + secondLargestPerimeter.getPerimeter());
     }
 
     private static Shape getMaxArea(Shape[] shapes) {
@@ -30,7 +31,7 @@ public class Main {
         return shapes[0];
     }
 
-    private static Shape getSecondForMaxPerimeter(Shape[] shapes) {
+    private static Shape getSecondLargestPerimeter(Shape[] shapes) {
         Arrays.sort(shapes, new PerimeterComparator());
         return shapes[1];
     }
