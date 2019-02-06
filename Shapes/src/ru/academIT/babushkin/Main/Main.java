@@ -15,23 +15,23 @@ public class Main {
 
         Shape[] shapes = {triangle1, rectangle1, rectangle2, square1, triangle2, circle1};
 
-        Shape maxArea = getMaxArea(shapes);
+        Shape maxArea = getShapeWithMaxArea(shapes);
         System.out.println(maxArea.toString());
         System.out.println("Площадь: " + maxArea.getArea());
         System.out.println("Периметр: " + maxArea.getPerimeter());
 
-        Shape secondLargestPerimeter = getSecondLargestPerimeter(shapes);
+        Shape secondLargestPerimeter = getShapeWithSecondLargestPerimeter(shapes);
         System.out.println(secondLargestPerimeter.toString());
         System.out.println("Площадь: " + secondLargestPerimeter.getArea());
         System.out.println("Периметр: " + secondLargestPerimeter.getPerimeter());
     }
 
-    private static Shape getMaxArea(Shape[] shapes) {
+    private static Shape getShapeWithMaxArea(Shape[] shapes) {
         Arrays.sort(shapes, new AreaComparator());
         return shapes[shapes.length - 1];
     }
 
-    private static Shape getSecondLargestPerimeter(Shape[] shapes) {
+    private static Shape getShapeWithSecondLargestPerimeter(Shape[] shapes) {
         Arrays.sort(shapes, new PerimeterComparator());
         return shapes[shapes.length - 2];
     }
