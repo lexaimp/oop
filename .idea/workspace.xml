@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3c1137b-fae7-4d74-a546-fddcb82c063e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vector/src/ru/academIT/babushkin/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Vector/src/ru/academIT/babushkin/Main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Vector/src/ru/academIT/babushkin/Vector/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/Vector/src/ru/academIT/babushkin/Vector/Vector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Shapes/ru/academIT/babushkin/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Shapes/ru/academIT/babushkin/Main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Shapes/ru/academIT/babushkin/Shapes/Square.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Shapes/ru/academIT/babushkin/Shapes/Square.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +16,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vector/src/ru/academIT/babushkin/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+            <state relative-caret-position="240">
+              <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -29,17 +25,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Vector/src/ru/academIT/babushkin/Vector/Vector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="55" column="1" lean-forward="true" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
+            <state relative-caret-position="429">
+              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
               <folding>
-                <element signature="e#369#370#0" expanded="true" />
-                <element signature="e#410#411#0" expanded="true" />
+                <element signature="e#301#302#0" expanded="true" />
+                <element signature="e#329#330#0" expanded="true" />
                 <element signature="e#447#448#0" expanded="true" />
                 <element signature="e#481#482#0" expanded="true" />
                 <element signature="e#457#458#0" expanded="true" />
                 <element signature="e#491#492#0" expanded="true" />
                 <element signature="e#881#882#0" expanded="true" />
                 <element signature="e#916#917#0" expanded="true" />
+                <element signature="e#1065#1066#0" expanded="true" />
+                <element signature="e#1087#1088#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -175,7 +173,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549473075846" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549475304683" />
     <property name="last_opened_file_path" value="/run/media/imp/20014175-47e4-4a32-a59a-51335ccf4a9a/it/java" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -274,8 +272,18 @@
     <option name="localTasksCounter" value="4" />
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1035" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17662753" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -286,12 +294,12 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4994664" weight="0.32855567" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.32855567" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3296582" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3296582" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3296582" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50053364" side_tool="true" weight="0.32855567" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3296582" />
@@ -432,13 +440,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vector/src/ru/academIT/babushkin/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/util/Arrays.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -446,19 +447,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Vector/src/ru/academIT/babushkin/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Vector/src/ru/academIT/babushkin/Vector/Vector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="55" column="1" lean-forward="true" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
+        <state relative-caret-position="429">
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
           <folding>
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#410#411#0" expanded="true" />
+            <element signature="e#301#302#0" expanded="true" />
+            <element signature="e#329#330#0" expanded="true" />
             <element signature="e#447#448#0" expanded="true" />
             <element signature="e#481#482#0" expanded="true" />
             <element signature="e#457#458#0" expanded="true" />
             <element signature="e#491#492#0" expanded="true" />
             <element signature="e#881#882#0" expanded="true" />
             <element signature="e#916#917#0" expanded="true" />
+            <element signature="e#1065#1066#0" expanded="true" />
+            <element signature="e#1087#1088#0" expanded="true" />
           </folding>
         </state>
       </provider>

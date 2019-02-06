@@ -30,27 +30,22 @@ public class Vector {
 
     @Override
     public String toString() {
-        if (array == null) {
-            return "null";
-        } else {
-            int var1 = array.length - 1;
-            if (var1 == -1) {
-                return "{}";
-            } else {
-                StringBuilder var2 = new StringBuilder();
-                var2.append("{");
-                int var3 = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{");
+        int var = 0;
 
-                while (true) {
-                    var2.append(array[var3]);
-                    if (var3 == var1) {
-                        return var2.append("}").toString();
-                    }
-
-                    var2.append(", ");
-                    ++var3;
-                }
+        while (true) {
+            stringBuilder.append(array[var]);
+            if (var == array.length - 1) {
+                return stringBuilder.append("}").toString();
             }
+
+            stringBuilder.append(", ");
+            ++var;
         }
     }
+
+   /* public static Vector getSum (Vector vector1, Vector vector2) {
+        vector1.array
+    }*/
 }
