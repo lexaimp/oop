@@ -28,11 +28,11 @@ public class Main {
 
     private static Shape getMaxArea(Shape[] shapes) {
         Arrays.sort(shapes, new AreaComparator());
-        return shapes[0];
+        return shapes[shapes.length - 1];
     }
 
     private static Shape getSecondLargestPerimeter(Shape[] shapes) {
         Arrays.sort(shapes, new PerimeterComparator());
-        return shapes[1];
+        return shapes[shapes.length - 2];
     }
 }
