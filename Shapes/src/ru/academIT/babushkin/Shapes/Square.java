@@ -1,35 +1,35 @@
 package ru.academIT.babushkin.Shapes;
 
 public class Square implements Shape {
-    private double sidelength;
+    private double sideLength;
 
-    public Square(double sidelength) {
-        this.sidelength = sidelength;
+    public Square(double sideLength) {
+        this.sideLength = sideLength;
     }
 
     @Override
     public double getWidth() {
-        return sidelength;
+        return sideLength;
     }
 
     @Override
     public double getHeight() {
-        return sidelength;
+        return sideLength;
     }
 
     @Override
     public double getArea() {
-        return Math.pow(sidelength, 2);
+        return Math.pow(sideLength, 2);
     }
 
     @Override
     public double getPerimeter() {
-        return sidelength * 4;
+        return sideLength * 4;
     }
 
     @Override
     public String toString() {
-        return "Квадрат, длина стороны: " + sidelength;
+        return "Квадрат, длина стороны: " + sideLength;
     }
 
     @Override
@@ -41,11 +41,11 @@ public class Square implements Shape {
             return false;
         }
         Square square = (Square) o;
-        return square.sidelength == sidelength;
+        return square.sideLength == sideLength;
     }
 
     @Override
     public int hashCode() {
-        return Double.hashCode(sidelength);
+        return Double.hashCode(sideLength);
     }
 }
