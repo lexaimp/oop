@@ -13,20 +13,33 @@ public class Vector {
     }
 
     public Vector(Vector vector) {
-
         this.array = Arrays.copyOf(vector.array, vector.array.length);
     }
 
     public Vector(double[] array) {
-        this.array = array;
+        if (array.length <= 0) {
+            throw new IllegalArgumentException();
+        }
+        this.array = Arrays.copyOf(array, array.length);
     }
 
     public Vector(int n, double[] array) {
+        if (n <= 0) {
+            throw new IllegalArgumentException();
+        }
         this.array = Arrays.copyOf(array, n);
     }
 
     public int getSize() {
         return array.length;
+    }
+
+    private static Vector getVectorWithMaxSize(Vector vector1, Vector vector2) {
+        return vector1.getSize() >= vector2.getSize() ? vector1 : vector2;
+    }
+
+    private static Vector getVectorWithMinSize(Vector vector1, Vector vector2) {
+        return vector1.getSize() <= vector2.getSize() ? vector1 : vector2;
     }
 
     @Override
@@ -46,20 +59,21 @@ public class Vector {
         }
     }
 
-    public Vector getMin(Vector vector1, Vector vector2) {
-        return vector1.getSize() <= vector2.getSize() ? vector1 : vector2;
+    public void getSum(Vector vector) {
+        if (getSize() <= vector.getSize()) {
+            System.arraycopy(array, getSize(), vector.array, getSize(), vector.getSize() - getSize());
+        }
+        for (int i = 0; i < vector.getSize(); i++) {
+            array[i] += vector.array[i];
+        }
     }
 
     public static Vector getSum(Vector vector1, Vector vector2) {
-        if (vector1.getSize() >= vector2.getSize()) {
-            for (int i = 0; i < vector2.getSize(); i++) {
-                vector1.array[i] += vector2.array[i];
-            }else{
-                for (int i = 0; i < vector1.getSize(); i++) {
-                    vector2.array[i] += vector1.array[i];
-                }
-            }
-            return vector1;
+        Vector max = Vector.getVectorWithMaxSize(vector1, vector2);
+        Vector min = Vector.getVectorWithMinSize(vector1, vector2);
+        for (int i = 0; i < min.getSize(); i++) {
+            max.array[i] = vector1.array[i] + vector2.array[i];
         }
+        return max;
     }
 }
