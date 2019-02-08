@@ -34,14 +34,6 @@ public class Vector {
         return array.length;
     }
 
-    private static Vector getVectorWithMaxSize(Vector vector1, Vector vector2) {
-        return vector1.getSize() >= vector2.getSize() ? vector1 : vector2;
-    }
-
-    private static Vector getVectorWithMinSize(Vector vector1, Vector vector2) {
-        return vector1.getSize() <= vector2.getSize() ? vector1 : vector2;
-    }
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -59,16 +51,34 @@ public class Vector {
         }
     }
 
-    public void getSum(Vector vector) {
+    public Vector sum(Vector vector) {
         if (getSize() <= vector.getSize()) {
             array = Arrays.copyOf(array, vector.getSize());
         }
         for (int i = 0; i < vector.getSize(); i++) {
             array[i] += vector.array[i];
         }
+        return vector;
     }
 
-    public void getReverseVector(Vector vector) {
+    public void difference(Vector vector) {
+        this.reverseVector(vector);
+        this.sum(vector);
+    }
+
+    public void multiplyByScalar(double scalar) {
+        for (int i = 0; i < this.getSize(); i++) {
+            this.array[i] *= scalar;
+        }
+    }
+
+    public void multiplyByScalar(int scalar) {
+        for (int i = 0; i < this.getSize(); i++) {
+            this.array[i] *= scalar;
+        }
+    }
+
+    public void reverseVector(Vector vector) {
         if (getSize() <= vector.getSize()) {
             array = Arrays.copyOf(array, vector.getSize());
         }
@@ -77,12 +87,59 @@ public class Vector {
         }
     }
 
-    public static Vector getSum(Vector vector1, Vector vector2) {
-        Vector max = Vector.getVectorWithMaxSize(vector1, vector2);
-        Vector min = Vector.getVectorWithMinSize(vector1, vector2);
-        for (int i = 0; i < min.getSize(); i++) {
-            max.array[i] = vector1.array[i] + vector2.array[i];
+    public double getVectorLength() {
+        double sum = 0;
+        for (double e : array) {
+            sum = Math.pow(e, 2);
         }
-        return max;
+        return Math.sqrt(sum);
     }
+
+    public double getArrayComponent(int index) {
+        if (index < 0 || index > this.getSize() - 1) {
+            throw new IllegalArgumentException();
+        }
+        return array[index];
+    }
+
+    public void setArrayComponent(double component, int index) {
+        if (index < 0 || index > this.getSize() - 1) {
+            throw new IllegalArgumentException();
+        }
+        array[index] = component;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+        Vector vector = (Vector) o;
+        return Arrays.equals(array, vector.array);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(array);
+    }
+
+    public static Vector getSum(Vector vector1, Vector vector2) {
+        Vector vector = new Vector(vector1);
+        vector.sum(vector2);
+        return vector;
+    }
+
+    public static Vector getDifference(Vector vector1, Vector vector2) {
+        Vector vector = new Vector(vector1);
+        vector.difference(vector2);
+        return vector;
+    }
+
+    // TODO: 08.02.19
+   /* public static Vector getScalarProduct(Vector vector1, Vector vector2) {
+
+    }*/
 }
