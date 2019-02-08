@@ -14,7 +14,7 @@ public class Main {
         Vector vector3 = new Vector(10, array);
         System.out.println(vector3.toString());
         System.out.println(vector2.getSize());
-        vector3.getSum(vector2);
-        System.out.println(vector3.toString());
+        vector2.getReverseVector(vector3);
+        System.out.println(vector2.toString());
     }
 }

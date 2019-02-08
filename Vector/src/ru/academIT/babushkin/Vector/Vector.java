@@ -61,10 +61,19 @@ public class Vector {
 
     public void getSum(Vector vector) {
         if (getSize() <= vector.getSize()) {
-            System.arraycopy(array, getSize(), vector.array, getSize(), vector.getSize() - getSize());
+            array = Arrays.copyOf(array, vector.getSize());
         }
         for (int i = 0; i < vector.getSize(); i++) {
             array[i] += vector.array[i];
+        }
+    }
+
+    public void getReverseVector(Vector vector) {
+        if (getSize() <= vector.getSize()) {
+            array = Arrays.copyOf(array, vector.getSize());
+        }
+        for (int i = 0; i < vector.getSize(); i++) {
+            array[i] = vector.array[i] * -1;
         }
     }
 
