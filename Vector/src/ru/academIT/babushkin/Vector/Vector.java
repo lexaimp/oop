@@ -138,8 +138,12 @@ public class Vector {
         return vector;
     }
 
-    // TODO: 08.02.19
-   /* public static Vector getScalarProduct(Vector vector1, Vector vector2) {
-
-    }*/
+    public static Vector getScalarProduct(Vector vector1, Vector vector2) {
+        Vector vector = new Vector(vector1);
+        int minSize = vector1.getSize() <= vector2.getSize() ? vector1.getSize() : vector2.getSize();
+        for (int i = 0; i < minSize; i++) {
+            vector.array[i] *= vector2.array[i];
+        }
+        return vector;
+    }
 }

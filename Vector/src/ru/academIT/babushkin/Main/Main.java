@@ -17,7 +17,9 @@ public class Main {
         Vector vector3 = new Vector(10, array);
         System.out.println(vector3.toString());
 
-        Vector vector4 = Vector.getSum(vector2, vector3);
+        Vector vector4 = Vector.getScalarProduct(vector2, vector3);
         System.out.println(vector4.toString());
+        System.out.println(vector2.toString());
+        System.out.println(vector3.toString());
     }
 }
