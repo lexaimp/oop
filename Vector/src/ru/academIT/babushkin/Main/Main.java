@@ -18,7 +18,7 @@ public class Main {
                 + vector2.getSize());
 
         vector1 = new Vector(vector2);
-        System.out.println("Скопированный вектор: " + vector1.toString());
+        System.out.println("Скопированный вектор: " + vector1.toString() + " Длинна: " + vector1.getLength());
 
         System.out.println("Равны ли вектора 1 и 2?: " + vector1.equals(vector2));
 
@@ -27,13 +27,13 @@ public class Main {
                 + vector2.getSize());
 
         vector1.sum(vector2);
-        System.out.println("Сумма векторов: " + vector1.toString());
+        System.out.println("Сумма 2х предыдущих векторов векторов: " + vector1.toString());
 
         vector2.difference(vector1);
         System.out.println("Разность векторов: " + vector2.toString());
 
         vector2.multiplyByScalar(5);
-        System.out.println("Результат умножения вектора на скаляр  = 5: " + vector2.toString());
+        System.out.println("Результат умножения вектора на скаляр = 5: " + vector2.toString());
 
         vector2.setArrayComponent(5.5, 5);
         System.out.println("Компонента по номеру 5: " + vector2.getArrayComponent(5));

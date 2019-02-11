@@ -51,14 +51,13 @@ public class Vector {
         }
     }
 
-    public Vector sum(Vector vector) {
+    public void sum(Vector vector) {
         if (getSize() <= vector.getSize()) {
             array = Arrays.copyOf(array, vector.getSize());
         }
         for (int i = 0; i < vector.getSize(); i++) {
             array[i] += vector.array[i];
         }
-        return vector;
     }
 
     public void difference(Vector vector) {
@@ -73,7 +72,7 @@ public class Vector {
         }
     }
 
-    public void reverseVector(Vector vector) {
+    private void reverseVector(Vector vector) {
         if (getSize() <= vector.getSize()) {
             array = Arrays.copyOf(array, vector.getSize());
         }
@@ -82,7 +81,7 @@ public class Vector {
         }
     }
 
-    public double getVectorLength() {
+    public double getLength() {
         double sum = 0;
         for (double e : array) {
             sum = Math.pow(e, 2);
