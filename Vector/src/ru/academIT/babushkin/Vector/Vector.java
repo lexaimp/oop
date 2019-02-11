@@ -62,17 +62,12 @@ public class Vector {
     }
 
     public void difference(Vector vector) {
-        this.reverseVector(vector);
-        this.sum(vector);
+        Vector vector1 = new Vector(vector);
+        vector1.reverseVector(vector);
+        this.sum(vector1);
     }
 
     public void multiplyByScalar(double scalar) {
-        for (int i = 0; i < this.getSize(); i++) {
-            this.array[i] *= scalar;
-        }
-    }
-
-    public void multiplyByScalar(int scalar) {
         for (int i = 0; i < this.getSize(); i++) {
             this.array[i] *= scalar;
         }
@@ -133,8 +128,9 @@ public class Vector {
     }
 
     public static Vector getDifference(Vector vector1, Vector vector2) {
-        Vector vector = new Vector(vector1);
-        vector.difference(vector2);
+        Vector vector = new Vector(vector2);
+        vector.reverseVector(vector2);
+        vector.sum(vector1);
         return vector;
     }
 
