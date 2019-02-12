@@ -2,6 +2,7 @@ package ru.academIT.babushkin.Main;
 
 import ru.academIT.babushkin.Vector.*;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -46,5 +47,8 @@ public class Main {
 
         vector4 = Vector.getScalarProduct(vector4, vector3);
         System.out.println("Скалярное произведение вкеторов 4 и 3: " + vector4);
+
+        vector4.reverseVector();
+        System.out.println("Обратный вектор: " + vector4.toString());
     }
 }
