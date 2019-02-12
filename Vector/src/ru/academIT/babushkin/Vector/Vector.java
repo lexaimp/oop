@@ -71,8 +71,8 @@ public class Vector {
     }
 
     public void reverseVector() {
-        for(int i = 0; i < getSize(); i++){
-            if(components[i] == 0){
+        for (int i = 0; i < getSize(); i++) {
+            if (components[i] == 0) {
                 continue;
             }
             components[i] *= -1;

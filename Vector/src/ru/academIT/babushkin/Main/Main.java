@@ -2,7 +2,6 @@ package ru.academIT.babushkin.Main;
 
 import ru.academIT.babushkin.Vector.*;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
