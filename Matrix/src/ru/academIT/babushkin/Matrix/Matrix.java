@@ -2,8 +2,6 @@ package ru.academIT.babushkin.Matrix;
 
 import ru.academIT.babushkin.Vector.*;
 
-import java.util.Arrays;
-
 public class Matrix {
     private Vector[] matrix;
 
@@ -15,12 +13,20 @@ public class Matrix {
     }
 
     public Matrix(Matrix matrix) {
-        this.matrix = Arrays.copyOf(matrix.matrix, matrix.matrix.length);
+        this(matrix.matrix);
     }
 
     public Matrix(double[][] array) {
-        for(int i = 0; i < array.length; i++) {
-            matrix[i] = new Vector(array[i].length, array[i]);
+        matrix = new Vector[array.length];
+        for (int i = 0; i < array.length; i++) {
+            matrix[i] = new Vector(array[i]);
+        }
+    }
+
+    public Matrix(Vector[] vectors) {
+        matrix = new Vector[vectors.length];
+        for (int i = 0; i < vectors.length; i++) {
+            matrix[i] = new Vector(vectors[i]);
         }
     }
 
