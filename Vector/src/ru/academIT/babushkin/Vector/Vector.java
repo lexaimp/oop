@@ -13,7 +13,7 @@ public class Vector {
     }
 
     public Vector(Vector vector) {
-        this(vector.components);
+        this.components = Arrays.copyOf(vector.components, vector.components.length);
     }
 
     public Vector(double[] components) {
@@ -82,21 +82,21 @@ public class Vector {
     public double getLength() {
         double sum = 0;
         for (double e : components) {
-            sum = Math.pow(e, 2);
+            sum += Math.pow(e, 2);
         }
         return Math.sqrt(sum);
     }
 
-    public double getArrayComponent(int index) {
-        if (index < 0 || index > this.getSize() - 1) {
-            throw new IllegalArgumentException();
+    public double getComponent(int index) {
+        if (index < 0 || index >= this.getSize()) {
+            throw new ArrayIndexOutOfBoundsException("Компоненты по такому индексу не существует");
         }
         return components[index];
     }
 
-    public void setArrayComponent(double component, int index) {
-        if (index < 0 || index > this.getSize() - 1) {
-            throw new IllegalArgumentException();
+    public void setComponent(double component, int index) {
+        if (index < 0 || index >= this.getSize()) {
+            throw new ArrayIndexOutOfBoundsException("Компоненты по такому индексу не существует");
         }
         components[index] = component;
     }
@@ -125,18 +125,17 @@ public class Vector {
     }
 
     public static Vector getDifference(Vector vector1, Vector vector2) {
-        Vector vector = new Vector(vector2);
-        vector.reverseVector();
-        vector.sum(vector1);
+        Vector vector = new Vector(vector1);
+        vector.difference(vector2);
         return vector;
     }
 
-    public static Vector getScalarProduct(Vector vector1, Vector vector2) {
-        Vector vector = new Vector(vector1);
+    public static double getScalarProduct(Vector vector1, Vector vector2) {
+        double product = 0;
         int minSize = vector1.getSize() <= vector2.getSize() ? vector1.getSize() : vector2.getSize();
         for (int i = 0; i < minSize; i++) {
-            vector.components[i] *= vector2.components[i];
+            product += vector1.components[i] * vector2.components[i];
         }
-        return vector;
+        return product;
     }
 }

@@ -32,11 +32,11 @@ public class Main {
         vector2.difference(vector1);
         System.out.println("Разность векторов: " + vector2.toString());
 
-        vector2.multiplyByScalar(5);
-        System.out.println("Результат умножения вектора на скаляр = 5: " + vector2.toString());
+        vector2.setComponent(5.5, 5);
+        System.out.println("Компонента по номеру 5: " + vector2.getComponent(5));
 
-        vector2.setArrayComponent(5.5, 5);
-        System.out.println("Компонента по номеру 5: " + vector2.getArrayComponent(5));
+        vector2.multiplyByScalar(5);
+        System.out.println("Результат умножения вектора 2 на скаляр = 5: " + vector2.toString());
 
         Vector vector3 = Vector.getSum(vector1, vector2);
         System.out.println("Вектор 3 это сумма 2х предыдущих векторов: " + vector3.toString());
@@ -44,8 +44,8 @@ public class Main {
         Vector vector4 = Vector.getDifference(vector3, vector2);
         System.out.println("Вектор 4 это разности вектора 3 и вектора 2:" + vector4.toString());
 
-        vector4 = Vector.getScalarProduct(vector4, vector3);
-        System.out.println("Скалярное произведение вкеторов 4 и 3: " + vector4);
+        double product = Vector.getScalarProduct(vector4, vector3);
+        System.out.println("Скалярное произведение вкеторов 4 и 3: " + product);
 
         vector4.reverseVector();
         System.out.println("Обратный вектор: " + vector4.toString());
