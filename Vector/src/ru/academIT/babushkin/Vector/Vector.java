@@ -47,7 +47,7 @@ public class Vector {
     }
 
     public void sum(Vector vector) {
-        if (getSize() <= vector.getSize()) {
+        if (getSize() < vector.getSize()) {
             components = Arrays.copyOf(components, vector.getSize());
         }
         for (int i = 0; i < vector.getSize(); i++) {
@@ -56,7 +56,7 @@ public class Vector {
     }
 
     public void difference(Vector vector) {
-        if (getSize() <= vector.getSize()) {
+        if (getSize() < vector.getSize()) {
             components = Arrays.copyOf(components, vector.getSize());
         }
         for (int i = 0; i < vector.getSize(); i++) {
@@ -65,18 +65,16 @@ public class Vector {
     }
 
     public void multiplyByScalar(double scalar) {
-        for (int i = 0; i < this.getSize(); i++) {
-            this.components[i] *= scalar;
-        }
-    }
-
-    public void reverseVector() {
         for (int i = 0; i < getSize(); i++) {
             if (components[i] == 0) {
                 continue;
             }
-            components[i] *= -1;
+            components[i] *= scalar;
         }
+    }
+
+    public void reverseVector() {
+        this.multiplyByScalar(-1);
     }
 
     public double getLength() {
@@ -89,14 +87,14 @@ public class Vector {
 
     public double getComponent(int index) {
         if (index < 0 || index >= this.getSize()) {
-            throw new ArrayIndexOutOfBoundsException("Компоненты по такому индексу не существует");
+            throw new IndexOutOfBoundsException("Компоненты по такому индексу не существует");
         }
         return components[index];
     }
 
     public void setComponent(double component, int index) {
         if (index < 0 || index >= this.getSize()) {
-            throw new ArrayIndexOutOfBoundsException("Компоненты по такому индексу не существует");
+            throw new IndexOutOfBoundsException("Компоненты по такому индексу не существует");
         }
         components[index] = component;
     }
@@ -132,7 +130,7 @@ public class Vector {
 
     public static double getScalarProduct(Vector vector1, Vector vector2) {
         double product = 0;
-        int minSize = vector1.getSize() <= vector2.getSize() ? vector1.getSize() : vector2.getSize();
+        int minSize = Math.min(vector1.getSize(), vector2.getSize());
         for (int i = 0; i < minSize; i++) {
             product += vector1.components[i] * vector2.components[i];
         }
