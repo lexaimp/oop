@@ -30,11 +30,36 @@ public class Matrix {
         }
     }
 
-    public int[] getSize (){
-        int[] size = new int[2];
-        size[0] = matrix.length;
-        size[1] = matrix[0].getSize();
-        return size;
+    public int getHeight() {
+        return matrix.length;
+    }
+
+    public int getWidth() {
+        return matrix[0].getSize();
+    }
+
+    public void setLine(int index, Vector vector) {
+        matrix[index] = new Vector(vector);
+    }
+
+    public Vector getLine(int index) {
+        return matrix[index];
+    }
+
+    public Vector getColumn(int index) {
+        Vector column = new Vector(this.getHeight());
+        for (int i = 0; i < this.getHeight(); ++i) {
+            column.setComponent(matrix[i].getComponent(index), i);
+        }
+        return column;
+    }
+
+    public void transposition() {
+        Matrix matrix = new Matrix(this.getHeight(), this.getWidth());
+        for (int i = 0; i < this.getWidth(); ++i) {
+            matrix.matrix[i] = this.getColumn(i);
+        }
+        this.matrix = matrix.matrix;
     }
 
     @Override

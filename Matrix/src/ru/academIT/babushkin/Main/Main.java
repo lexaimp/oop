@@ -1,25 +1,29 @@
 package ru.academIT.babushkin.Main;
 
 import ru.academIT.babushkin.Matrix.*;
-
-import java.util.Arrays;
+import ru.academIT.babushkin.Vector.Vector;
 
 public class Main {
     public static void main(String[] args) {
-        Matrix matrix = new Matrix(5, 5);
+        Matrix matrix = new Matrix(3, 5);
         System.out.println(matrix.toString());
 
-        double[][] array = new double[4][2];
+        double[][] array = new double[3][2];
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-                array[i][j] = (int) (Math.random() * 10);
+                array[i][j] = (int) (Math.random() * 15);
             }
         }
 
         Matrix matrix1 = new Matrix(array);
         System.out.println(matrix1.toString());
 
-        int[] size = matrix1.getSize();
-        System.out.println(Arrays.toString(size));
+        System.out.println(matrix1.getHeight() + " " + matrix1.getWidth());
+
+        Vector vector = matrix1.getColumn(1);
+        System.out.println(vector.toString());
+
+        matrix1.transposition();
+        System.out.println(matrix1.toString());
     }
 }
