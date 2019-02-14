@@ -30,6 +30,13 @@ public class Matrix {
         }
     }
 
+    public int[] getSize (){
+        int[] size = new int[2];
+        size[0] = matrix.length;
+        size[1] = matrix[0].getSize();
+        return size;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
