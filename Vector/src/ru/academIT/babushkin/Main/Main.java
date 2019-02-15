@@ -47,7 +47,7 @@ public class Main {
         double product = Vector.getScalarProduct(vector4, vector3);
         System.out.println("Скалярное произведение вкеторов 4 и 3: " + product);
 
-        vector4.reverseVector();
+        vector4.reverse();
         System.out.println("Обратный вектор: " + vector4.toString());
     }
 }

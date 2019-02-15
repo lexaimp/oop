@@ -66,14 +66,11 @@ public class Vector {
 
     public void multiplyByScalar(double scalar) {
         for (int i = 0; i < getSize(); i++) {
-            if (components[i] == 0) {
-                continue;
-            }
             components[i] *= scalar;
         }
     }
 
-    public void reverseVector() {
+    public void reverse() {
         this.multiplyByScalar(-1);
     }
 
