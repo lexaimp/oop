@@ -8,7 +8,7 @@ public class Main {
         Matrix matrix = new Matrix(3, 5);
         System.out.println(matrix.toString());
 
-        double[][] array = new double[3][2];
+        double[][] array = new double[5][5];
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 array[i][j] = (int) (Math.random() * 15);
@@ -25,5 +25,12 @@ public class Main {
 
         matrix1.transposition();
         System.out.println(matrix1.toString());
+
+        matrix1.multiplyByScalar(3);
+        System.out.println(matrix1.toString());
+
+        System.out.println(matrix1.determinant());
+
+        matrix1.getLine(5);
     }
 }
