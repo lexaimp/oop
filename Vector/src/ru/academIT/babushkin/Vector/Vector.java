@@ -96,6 +96,7 @@ public class Vector {
         components[index] = component;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {

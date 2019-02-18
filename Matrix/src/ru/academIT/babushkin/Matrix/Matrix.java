@@ -39,14 +39,14 @@ public class Matrix {
     }
 
     public void setLine(int index, Vector vector) {
-        if (index < 0 || index >= matrix.length){
+        if (index < 0 || index >= matrix.length) {
             throw new IndexOutOfBoundsException("Строки по такому индексу не существует");
         }
         matrix[index] = new Vector(vector);
     }
 
     public Vector getLine(int index) {
-        if (index < 0 || index >= matrix.length){
+        if (index < 0 || index >= matrix.length) {
             throw new IndexOutOfBoundsException("Строки по такому индексу не существует");
         }
         return matrix[index];
@@ -74,7 +74,7 @@ public class Matrix {
         }
     }
 
-    public double determinant() {
+    public double getDeterminant() {
         if (this.getWidth() != this.getHeight()) {
             throw new IllegalArgumentException("Матрица не является квадратной");
         }
@@ -97,14 +97,69 @@ public class Matrix {
                     temp++;
                 }
             }
-            det += Math.pow(-1, k) * matrix[0].getComponent(k) * minor.determinant();
+            det += Math.pow(-1, k) * matrix[0].getComponent(k) * minor.getDeterminant();
         }
         return det;
     }
 
-    public Vector getMultiplyByVector (Vector vector){
-
+    public Vector getMultiplyByVector(Vector vector) {
+        if (this.getHeight() != vector.getSize()) {
+            throw new IllegalArgumentException("Высота матрицы не соответствует ширине вектора");
+        }
+        Vector vector1 = new Vector(this.getHeight());
+        for (int i = 0; i < vector.getSize(); i++) {
+            vector1.setComponent(Vector.getScalarProduct(matrix[i], vector), i);
+        }
+        return vector1;
     }
+
+    public void sum(Matrix matrix) {
+        if (this.getHeight() != matrix.getHeight() || this.getHeight() != matrix.getHeight()) {
+            throw new IllegalArgumentException("Размеры матриц не совпадают");
+        }
+        for (int i = 0; i < matrix.getHeight(); i++) {
+            this.matrix[i].sum(matrix.matrix[i]);
+        }
+    }
+
+    public void difference(Matrix matrix) {
+        if (this.getHeight() != matrix.getHeight() || this.getHeight() != matrix.getHeight()) {
+            throw new IllegalArgumentException("Размеры матриц не совпадают");
+        }
+        for (int i = 0; i < matrix.getHeight(); i++) {
+            this.matrix[i].difference(matrix.matrix[i]);
+        }
+    }
+
+    public static Matrix getSum(Matrix matrix1, Matrix matrix2) {
+        if (matrix1.getHeight() != matrix2.getHeight() || matrix1.getWidth() != matrix2.getWidth()) {
+            throw new IllegalArgumentException("Размеры матриц не совпадают");
+        }
+        Matrix matrix = new Matrix(matrix1);
+        matrix.sum(matrix2);
+        return matrix;
+    }
+
+    public static Matrix getDifference(Matrix matrix1, Matrix matrix2) {
+        if (matrix1.getHeight() != matrix2.getHeight() || matrix1.getWidth() != matrix2.getWidth()) {
+            throw new IllegalArgumentException("Размеры матриц не совпадают");
+        }
+        Matrix matrix = new Matrix(matrix1);
+        matrix.difference(matrix2);
+        return matrix;
+    }
+//todo Доделать умножение
+    public static Matrix getMultiplication(Matrix matrix1, Matrix matrix2) {
+        if (matrix1.getHeight() != matrix2.getWidth()) {
+            throw new IllegalArgumentException("Высота умножаемой матрицы не соответствует ширине матрици на которую уможают");
+        }
+        Matrix matrix = new Matrix(matrix1);
+        for (int i = 0; i < matrix.getHeight(); i++) {
+            matrix.matrix[i] = matrix.getMultiplyByVector(matrix2.getColumn(i));// Неправильная реализация
+        }
+        return matrix;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
