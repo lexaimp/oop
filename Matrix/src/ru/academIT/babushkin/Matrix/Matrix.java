@@ -157,7 +157,7 @@ public class Matrix {
 
     public static Matrix getMultiplication(Matrix matrix1, Matrix matrix2) {
         if (matrix1.getHeight() != matrix2.getWidth()) {
-            throw new IllegalArgumentException("Высота умножаемой матрицы не соответствует ширине матрици на которую уможают");
+            throw new IllegalArgumentException("Высота умножаемой матрицы не соответствует ширине матрицы на которую умножают");
         }
         Matrix resultMatrix = new Matrix(matrix1.getHeight(), matrix2.getWidth());
         for (int i = 0; i < matrix1.getHeight(); i++) {

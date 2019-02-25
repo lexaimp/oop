@@ -70,7 +70,7 @@ public class Main {
         System.out.println(matrix3);
 
         matrix1.getMultiplyByVector(vector);
-        System.out.println("Умноежние матрицы 1 и матрицы 2:");
+        System.out.println("Умножение матрицы 1 и матрицы 2:");
         matrix3 = Matrix.getMultiplication(matrix1, matrix2);
         System.out.println(matrix3.toString());
     }
