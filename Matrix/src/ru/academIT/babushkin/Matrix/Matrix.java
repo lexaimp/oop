@@ -6,6 +6,9 @@ public class Matrix {
     private Vector[] matrix;
 
     public Matrix(int n, int m) {
+        if (n <= 0 || m <= 0) {
+            throw new IllegalArgumentException("Неправильно задана размерность матрицы");
+        }
         matrix = new Vector[m];
         for (int i = 0; i < m; i++) {
             matrix[i] = new Vector(n);
@@ -23,7 +26,7 @@ public class Matrix {
         }
     }
 
-    public Matrix(Vector[] vectors) {
+    private Matrix(Vector[] vectors) {
         matrix = new Vector[vectors.length];
         for (int i = 0; i < vectors.length; i++) {
             matrix[i] = new Vector(vectors[i]);
@@ -53,6 +56,9 @@ public class Matrix {
     }
 
     public Vector getColumn(int index) {
+        if (index < 0 || index >= this.getHeight()) {
+            throw new IndexOutOfBoundsException("Столбца по такому индексу не существует");
+        }
         Vector column = new Vector(this.getHeight());
         for (int i = 0; i < this.getHeight(); ++i) {
             column.setComponent(matrix[i].getComponent(index), i);
@@ -122,7 +128,7 @@ public class Matrix {
         }
     }
 
-    public void difference(Matrix matrix) {
+    private void difference(Matrix matrix) {
         if (this.getHeight() != matrix.getHeight() || this.getHeight() != matrix.getHeight()) {
             throw new IllegalArgumentException("Размеры матриц не совпадают");
         }
@@ -148,16 +154,17 @@ public class Matrix {
         matrix.difference(matrix2);
         return matrix;
     }
-//todo Доделать умножение
+
     public static Matrix getMultiplication(Matrix matrix1, Matrix matrix2) {
         if (matrix1.getHeight() != matrix2.getWidth()) {
             throw new IllegalArgumentException("Высота умножаемой матрицы не соответствует ширине матрици на которую уможают");
         }
-        Matrix matrix = new Matrix(matrix1);
-        for (int i = 0; i < matrix.getHeight(); i++) {
-            matrix.matrix[i] = matrix.getMultiplyByVector(matrix2.getColumn(i));// Неправильная реализация
+        Matrix resultMatrix = new Matrix(matrix1.getHeight(), matrix2.getWidth());
+        for (int i = 0; i < matrix1.getHeight(); i++) {
+            Matrix matrix = new Matrix(matrix1);
+            resultMatrix.matrix[i] = matrix.getMultiplyByVector(matrix2.getColumn(i));
         }
-        return matrix;
+        return resultMatrix;
     }
 
     @Override
