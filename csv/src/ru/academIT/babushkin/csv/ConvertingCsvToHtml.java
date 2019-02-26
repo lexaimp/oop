@@ -19,10 +19,19 @@ public class ConvertingCsvToHtml {
                     .append("<table border=\"1\">\n");
 
             while (scanner.hasNext()) {
-                fileWriter.append(scanner.nextLine());
+                fileWriter.append("<tr>");
+                String string = scanner.nextLine();
+                for (int i = 0; i < string.length(); i++) {
+                    if (string.charAt(i) == ','){
+                        fileWriter.append("</td><td>");
+                        continue;
+                    }
+                    fileWriter.append(string.charAt(i));
+                }
             }
 
-            fileWriter.append("\n</table>\n")
+            fileWriter.append("</td>")
+                    .append("\n</table>\n")
                     .append(("</body>\n"))
                     .append("</html>");
         } catch (IOException e) {
