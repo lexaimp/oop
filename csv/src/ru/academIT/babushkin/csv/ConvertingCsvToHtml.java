@@ -16,21 +16,19 @@ public class ConvertingCsvToHtml {
                     .append("</head>\n")
                     .append("<body>\n")
                     .append("<h1>Таблица</h1>\n")
-                    .append("<table border=\"1\">\n");
+                    .append("<table border=\"1\">\n")
+                    .append("<tr>");
 
             while (scanner.hasNext()) {
-                fileWriter.append("<tr>");
-                String string = scanner.nextLine();
-                for (int i = 0; i < string.length(); i++) {
-                    if (string.charAt(i) == ','){
-                        fileWriter.append("</td><td>");
-                        continue;
-                    }
-                    fileWriter.append(string.charAt(i));
+                String[] strings = scanner.nextLine().split(",");
+                for (int i = 0; i < strings.length; i++) {
+                    fileWriter.append("<td>")
+                            .append(strings[i])
+                            .append("</td>");
                 }
             }
 
-            fileWriter.append("</td>")
+            fileWriter.append("</tr>")
                     .append("\n</table>\n")
                     .append(("</body>\n"))
                     .append("</html>");
