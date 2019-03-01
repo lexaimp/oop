@@ -20,17 +20,17 @@ public class Main {
         System.out.println("Матрица созданная из массива:");
         System.out.println(matrix1.toString());
 
-        System.out.println("MatrixHeight:" + matrix1.getHeight() + ", MatrixWidth:" + matrix1.getWidth());
+        System.out.println("MatrixHeight:" + matrix1.getColumnsCount() + ", MatrixWidth:" + matrix1.getRowsCount());
 
         Vector vector = matrix1.getColumn(1);
         System.out.println("1 столбец матрицы:");
         System.out.println(vector.toString());
 
         System.out.println("2 строка матрицы:");
-        System.out.println(matrix1.getLine(1));
-        matrix1.setLine(1, vector);
+        System.out.println(matrix1.getRow(1));
+        matrix1.setRow(1, vector);
         System.out.println("Меняем 2 строку матрицы на вектор:");
-        System.out.println(matrix1.getLine(1));
+        System.out.println(matrix1.getRow(1));
 
         matrix1.transposition();
         System.out.println("Транспонирование матрицы:");
