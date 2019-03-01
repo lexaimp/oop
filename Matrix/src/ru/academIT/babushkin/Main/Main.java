@@ -73,5 +73,13 @@ public class Main {
         System.out.println("Умножение матрицы 1 и матрицы 2:");
         matrix3 = Matrix.getMultiplication(matrix1, matrix2);
         System.out.println(matrix3.toString());
+
+        double[] b = {};
+        double[] c = {2, 3};
+        double[][] a = new double[3][2];
+        a[0] = b;
+        a[1] = c;
+        a[2] = c;
+        Matrix matrix4 = new Matrix(a);
     }
 }
