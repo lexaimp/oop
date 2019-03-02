@@ -62,7 +62,7 @@ public class Matrix {
         return rows.length;
     }
 
-    public int getColumnCount() {
+    public int getColumnsCount() {
         return rows[0].getSize();
     }
 
@@ -84,7 +84,7 @@ public class Matrix {
     }
 
     public Vector getColumn(int index) {
-        if (index < 0 || index >= this.getColumnCount()) {
+        if (index < 0 || index >= this.getColumnsCount()) {
             throw new IndexOutOfBoundsException("Столбца по такому индексу не существует");
         }
         Vector column = new Vector(this.getRowsCount());
@@ -95,8 +95,8 @@ public class Matrix {
     }
 
     public void transposition() {
-        Vector[] vectors = new Vector[this.getColumnCount()];
-        for (int i = 0; i < this.getColumnCount(); ++i) {
+        Vector[] vectors = new Vector[this.getColumnsCount()];
+        for (int i = 0; i < this.getColumnsCount(); ++i) {
             vectors[i] = this.getColumn(i);
         }
         this.rows = vectors;
@@ -109,7 +109,7 @@ public class Matrix {
     }
 
     public double getDeterminant() {
-        if (this.getColumnCount() != this.getRowsCount()) {
+        if (this.getColumnsCount() != this.getRowsCount()) {
             throw new IllegalArgumentException("Матрица не является квадратной");
         }
         if (rows.length == 1) {
@@ -137,7 +137,7 @@ public class Matrix {
     }
 
     public Vector getMultiplyByVector(Vector vector) {
-        if (this.getColumnCount() != vector.getSize()) {
+        if (this.getColumnsCount() != vector.getSize()) {
             throw new IllegalArgumentException("Число столбцов в матрице не совпадает с числом строк в векторе столбце");
         }
         Vector vector1 = new Vector(this.getRowsCount());
@@ -148,7 +148,7 @@ public class Matrix {
     }
 
     public void sum(Matrix matrix) {
-        if (this.getRowsCount() != matrix.getRowsCount() || this.getColumnCount() != matrix.getColumnCount()) {
+        if (this.getRowsCount() != matrix.getRowsCount() || this.getColumnsCount() != matrix.getColumnsCount()) {
             throw new IllegalArgumentException("Размеры матриц не совпадают");
         }
         for (int i = 0; i < matrix.getRowsCount(); i++) {
@@ -157,7 +157,7 @@ public class Matrix {
     }
 
     private void difference(Matrix matrix) {
-        if (this.getRowsCount() != matrix.getRowsCount() || this.getColumnCount() != matrix.getColumnCount()) {
+        if (this.getRowsCount() != matrix.getRowsCount() || this.getColumnsCount() != matrix.getColumnsCount()) {
             throw new IllegalArgumentException("Размеры матриц не совпадают");
         }
         for (int i = 0; i < matrix.getRowsCount(); i++) {
@@ -166,7 +166,7 @@ public class Matrix {
     }
 
     public static Matrix getSum(Matrix matrix1, Matrix matrix2) {
-        if (matrix1.getRowsCount() != matrix2.getRowsCount() || matrix1.getColumnCount() != matrix2.getColumnCount()) {
+        if (matrix1.getRowsCount() != matrix2.getRowsCount() || matrix1.getColumnsCount() != matrix2.getColumnsCount()) {
             throw new IllegalArgumentException("Размеры матриц не совпадают");
         }
         Matrix matrix = new Matrix(matrix1);
@@ -175,7 +175,7 @@ public class Matrix {
     }
 
     public static Matrix getDifference(Matrix matrix1, Matrix matrix2) {
-        if (matrix1.getRowsCount() != matrix2.getRowsCount() || matrix1.getColumnCount() != matrix2.getColumnCount()) {
+        if (matrix1.getRowsCount() != matrix2.getRowsCount() || matrix1.getColumnsCount() != matrix2.getColumnsCount()) {
             throw new IllegalArgumentException("Размеры матриц не совпадают");
         }
         Matrix matrix = new Matrix(matrix1);
@@ -184,11 +184,11 @@ public class Matrix {
     }
 
     public static Matrix getMultiplication(Matrix matrix1, Matrix matrix2) {
-        if (matrix1.getColumnCount() != matrix2.getRowsCount()) {
+        if (matrix1.getColumnsCount() != matrix2.getRowsCount()) {
             throw new IllegalArgumentException("Количество столбцов 1 матрицы не соответствует количеству строк 2 матрицы");
         }
-        Matrix matrix = new Matrix(matrix1.getRowsCount(), matrix2.getColumnCount());
-        for (int i = 0; i < matrix2.getColumnCount(); i++) {
+        Matrix matrix = new Matrix(matrix1.getRowsCount(), matrix2.getColumnsCount());
+        for (int i = 0; i < matrix2.getColumnsCount(); i++) {
             matrix.setRow(i, matrix1.getMultiplyByVector(matrix2.getColumn(i)));
         }
         matrix.transposition();

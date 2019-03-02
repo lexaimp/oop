@@ -19,7 +19,7 @@ public class Main {
         Matrix matrix1 = new Matrix(array);
         System.out.println("Матрица созданная из массива:");
         System.out.println(matrix1.toString());
-        System.out.println("MatrixHeight:" + matrix1.getRowsCount() + ", MatrixWidth:" + matrix1.getColumnCount());
+        System.out.println("MatrixHeight:" + matrix1.getRowsCount() + ", MatrixWidth:" + matrix1.getColumnsCount());
 
         Vector vector = matrix1.getColumn(1);
         System.out.println("1 столбец матрицы:");
