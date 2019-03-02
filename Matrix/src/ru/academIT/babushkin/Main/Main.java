@@ -19,8 +19,7 @@ public class Main {
         Matrix matrix1 = new Matrix(array);
         System.out.println("Матрица созданная из массива:");
         System.out.println(matrix1.toString());
-
-        System.out.println("MatrixHeight:" + matrix1.getColumnsCount() + ", MatrixWidth:" + matrix1.getRowsCount());
+        System.out.println("MatrixHeight:" + matrix1.getRowsCount() + ", MatrixWidth:" + matrix1.getColumnCount());
 
         Vector vector = matrix1.getColumn(1);
         System.out.println("1 столбец матрицы:");
@@ -32,6 +31,8 @@ public class Main {
         System.out.println("Меняем 2 строку матрицы на вектор:");
         System.out.println(matrix1.getRow(1));
 
+        System.out.println("Исходная матрица");
+        System.out.println(matrix1.toString());
         matrix1.transposition();
         System.out.println("Транспонирование матрицы:");
         System.out.println(matrix1.toString());
@@ -43,8 +44,7 @@ public class Main {
         System.out.println("Получение определителя матрицы:");
         System.out.println(matrix1.getDeterminant());
 
-
-        Vector vector1 = new Vector(array[0]); //получаем вектор из первого элемента матрицы
+        Vector vector1 = new Vector(array[0]);
         System.out.println("Вектор:");
         System.out.println(vector1.toString());
         System.out.println("Умножение матрицы на вектор:");
@@ -69,17 +69,29 @@ public class Main {
         System.out.println("Раздница матрицы 2 и матрицы 1:");
         System.out.println(matrix3);
 
-        matrix1.getMultiplyByVector(vector);
-        System.out.println("Умножение матрицы 1 и матрицы 2:");
+        double[][] array1 = new double[3][2];
+        for (int i = 0; i < array1.length; i++) {
+            for (int j = 0; j < array1[i].length; j++) {
+                array1[i][j] = (int) (Math.random() * 25);
+            }
+        }
+
+        double[][] array2 = new double[2][3];
+        for (int i = 0; i < array2.length; i++) {
+            for (int j = 0; j < array2[i].length; j++) {
+                array2[i][j] = (int) (Math.random() * 12);
+            }
+        }
+
+        matrix1 = new Matrix(array1);
+        matrix2 = new Matrix(array2);
+        System.out.println("Матрица 1");
+        System.out.println(matrix1.toString());
+        System.out.println("Матирца 2");
+        System.out.println(matrix2.toString());
+
+        System.out.println("Умножение матрицы 1 на матрицу 2:");
         matrix3 = Matrix.getMultiplication(matrix1, matrix2);
         System.out.println(matrix3.toString());
-
-        double[] b = {};
-        double[] c = {2, 3};
-        double[][] a = new double[3][2];
-        a[0] = b;
-        a[1] = c;
-        a[2] = c;
-        Matrix matrix4 = new Matrix(a);
     }
 }
