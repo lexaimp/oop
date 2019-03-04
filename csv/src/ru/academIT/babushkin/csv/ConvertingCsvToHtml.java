@@ -7,6 +7,18 @@ import java.util.Scanner;
 
 public class ConvertingCsvToHtml {
     public static void main(String[] args) {
+//        CsvParser csvParser = null;
+////        csvParser.setDelimiter(",");
+////
+////        try (FileReader fileReader = new FileReader("csv/src/ru/academIT/babushkin/csv/example.csv");
+////             FileWriter fileWriter = new FileWriter("csv/src/ru/academIT/babushkin/csv/example.html")) {
+////
+////        } catch (IOException e) {
+////            e.printStackTrace();
+////        }
+////    }
+////}
+
         try (Scanner scanner = new Scanner(new FileReader("csv/src/ru/academIT/babushkin/csv/example.csv")); FileWriter fileWriter = new FileWriter("csv/src/ru/academIT/babushkin/csv/example.html")) {
             fileWriter.append("<!DOCTYPE html>\n")
                     .append("<html>\n")
@@ -18,26 +30,16 @@ public class ConvertingCsvToHtml {
                     .append("<h1>Таблица</h1>\n")
                     .append("<table border=\"1\">\n")
                     .append("<tr>");
-
+            scanner.useDelimiter(",");
             while (scanner.hasNext()) {
-                String[] strings = scanner.nextLine().split(",");
-                for (int i = 0; i < strings.length; i++) {
-                    fileWriter.append("<td>")
-                            .append(strings[i])
-                            .append("</td>");
-                }
+                System.out.println(scanner.next());
+                fileWriter.append("<td>")
+                        .append("</td>");
             }
-
             fileWriter.append("</tr>")
                     .append("\n</table>\n")
                     .append(("</body>\n"))
                     .append("</html>");
         } catch (IOException e) {
-            System.out.println(e.toString());
-        }
-    }
-}
-/*
-<tr><th>текст заголовка</th><th>текст заголовка</th></tr> <!--ряд с ячейками заголовков-->
-<tr><td>данные</td><td>данные</td></tr> <!--ряд с ячейками тела таблицы-->
-</table>*/
+            e.printStackTrace();
+        }}}
