@@ -89,7 +89,7 @@ public class Vector {
         return components[index];
     }
 
-    public void setComponent(double component, int index) {
+    public void setComponent(int index, double component) {
         if (index < 0 || index >= this.getSize()) {
             throw new IndexOutOfBoundsException("Компоненты по такому индексу не существует");
         }
