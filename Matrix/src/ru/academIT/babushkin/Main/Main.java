@@ -93,5 +93,19 @@ public class Main {
         System.out.println("Умножение матрицы 1 на матрицу 2:");
         matrix3 = Matrix.getMultiplication(matrix1, matrix2);
         System.out.println(matrix3.toString());
+
+
+        Vector[] vectors = new Vector[3];
+        vectors[0] = vector;
+        vectors[1] = vector1;
+        vectors[2] = new Vector(4);
+        System.out.println("2 вектора");
+        System.out.println(vectors[0]);
+        System.out.println(vectors[1]);
+        System.out.println(vectors[2]);
+
+        Matrix matrix4 = new Matrix(vectors);
+        System.out.println("Matrix");
+        System.out.println(matrix4);
     }
 }

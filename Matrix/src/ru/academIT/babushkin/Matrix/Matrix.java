@@ -1,3 +1,4 @@
+//3. Умножение матриц - setRow лучше не вызывать, он создает копию
 package ru.academIT.babushkin.Matrix;
 
 import ru.academIT.babushkin.Vector.*;
@@ -37,11 +38,11 @@ public class Matrix {
         }
         rows = new Vector[array.length];
         for (int i = 0; i < array.length; i++) {
-            rows[i] = new Vector(array[i]);
+            rows[i] = new Vector(maxLength, array[i]);
         }
     }
 
-    private Matrix(Vector[] vectors) {
+    public Matrix(Vector[] vectors) {
         if (vectors == null) {
             throw new NullPointerException("Входной массив не может быть NULL");
         }
@@ -54,19 +55,13 @@ public class Matrix {
                 maxLength = e.getSize();
             }
         }
-        if (maxLength == 0) {
-            throw new IllegalArgumentException("Длинна хотябы одного элемента массива должна быть больше нуля");
-        }
-        if (vectors.length != 1) {
-            for (int i = 1; i < vectors.length; i++) {
-                if (vectors[i].getSize() != vectors[i - 1].getSize()) {
-                    throw new IllegalArgumentException("Разная размерность входного массива");
-                }
-            }
-        }
         rows = new Vector[vectors.length];
         for (int i = 0; i < vectors.length; i++) {
-            rows[i] = new Vector(vectors[i]);
+            double[] row = new double[vectors[i].getSize()];
+            for (int j = 0; j < vectors[i].getSize(); j++) {
+                row[j] = vectors[i].getComponent(j);
+            }
+            rows[i] = new Vector(maxLength, row);
         }
     }
 
@@ -205,7 +200,7 @@ public class Matrix {
             for (int j = 0; j < matrix2.getColumnsCount(); j++) {
                 vector.setComponent(j, Vector.getScalarProduct(matrix1.rows[i], matrix2.getColumn(j)));
             }
-            resultMatrix.setRow(i, vector);
+            resultMatrix.rows[i] = vector;
         }
         return resultMatrix;
     }
