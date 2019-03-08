@@ -1,45 +1,64 @@
 package ru.academIT.babushkin.csv;
 
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class ConvertingCsvToHtml {
     public static void main(String[] args) {
-//        CsvParser csvParser = null;
-////        csvParser.setDelimiter(",");
-////
-////        try (FileReader fileReader = new FileReader("csv/src/ru/academIT/babushkin/csv/example.csv");
-////             FileWriter fileWriter = new FileWriter("csv/src/ru/academIT/babushkin/csv/example.html")) {
-////
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        }
-////    }
-////}
+        try (Scanner scanner = new Scanner(new FileReader("csv/src/ru/academIT/babushkin/csv/example.csv"));
+             PrintWriter printWriter = new PrintWriter("csv/src/ru/academIT/babushkin/csv/example.html")) {
+            printWriter.print("<!DOCTYPE html>\n" +
+                    "<html>\n" +
+                    "<head>\n" +
+                    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n" +
+                    "<title>example</title>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "<h1>Таблица</h1>\n" +
+                    "<table border=\"1\">\n");
 
-        try (Scanner scanner = new Scanner(new FileReader("csv/src/ru/academIT/babushkin/csv/example.csv")); FileWriter fileWriter = new FileWriter("csv/src/ru/academIT/babushkin/csv/example.html")) {
-            fileWriter.append("<!DOCTYPE html>\n")
-                    .append("<html>\n")
-                    .append("<head>\n")
-                    .append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n")
-                    .append("<title>example</title>\n")
-                    .append("</head>\n")
-                    .append("<body>\n")
-                    .append("<h1>Таблица</h1>\n")
-                    .append("<table border=\"1\">\n")
-                    .append("<tr>");
-            scanner.useDelimiter(",");
+            boolean problem = false;
             while (scanner.hasNext()) {
-                System.out.println(scanner.next());
-                fileWriter.append("<td>")
-                        .append("</td>");
+                if (!problem) {
+                    printWriter.print("<tr><td>");
+                }
+                String string = scanner.nextLine();
+                for (int i = 0; i < string.length(); i++) {
+                    char symbol = string.charAt(i);
+
+                    if (symbol == '"') {
+                        if (i == string.length() - 1) {
+                            problem = !problem;
+                        } else if (string.charAt(i + 1) == '"' && problem) {
+                            printWriter.print(symbol);
+                            ++i;
+                        } else {
+                            problem = !problem;
+                        }
+                    } else if (symbol == ',') {
+                        if (problem) {
+                            printWriter.print(",");
+                        } else {
+                            printWriter.print("</td><td>");
+                        }
+                    } else {
+                        printWriter.print(symbol);
+                    }
+
+                }
+                if (problem) {
+                    printWriter.print("<br/>");
+                } else {
+                    printWriter.print("</td></tr>");
+                }
             }
-            fileWriter.append("</tr>")
-                    .append("\n</table>\n")
-                    .append(("</body>\n"))
-                    .append("</html>");
+            printWriter.print("\n</table>\n" +
+                    "</body>\n" +
+                    "</html>");
         } catch (IOException e) {
             e.printStackTrace();
-        }}}
+        }
+    }
+}
