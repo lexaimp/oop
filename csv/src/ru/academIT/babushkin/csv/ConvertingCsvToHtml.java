@@ -1,7 +1,7 @@
 package ru.academIT.babushkin.csv;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -57,8 +57,8 @@ public class ConvertingCsvToHtml {
             printWriter.print("\n</table>\n" +
                     "</body>\n" +
                     "</html>");
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException notFound) {
+            System.out.println("Не удалось найти файл");
         }
     }
 }
