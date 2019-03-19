@@ -1,13 +1,3 @@
-//Добрый день!
-//
-//1. Пусть программа берет пути к файлам из аргументов программы +
-//
-//2. Плохо использовать \n, он не для всех платформ+
-//
-//3. Надо обработать >, <, &
-//
-//4. problem - неинформативное имя
-
 package ru.academIT.babushkin.csv;
 
 import java.io.FileNotFoundException;
@@ -40,9 +30,9 @@ public class ConvertingCsvToHtml {
                         "<h1>Таблица</h1>" + ls +
                         "<table border=\"1\">");
 
-                boolean problem = false;
+                boolean cellInQuotes = false;
                 while (scanner.hasNext()) {
-                    if (!problem) {
+                    if (!cellInQuotes) {
                         printWriter.print("<tr><td>");
                     }
                     String string = scanner.nextLine();
@@ -51,25 +41,31 @@ public class ConvertingCsvToHtml {
 
                         if (symbol == '"') {
                             if (i == string.length() - 1) {
-                                problem = !problem;
-                            } else if (string.charAt(i + 1) == '"' && problem) {
+                                cellInQuotes = !cellInQuotes;
+                            } else if (string.charAt(i + 1) == '"' && cellInQuotes) {
                                 printWriter.print(symbol);
                                 ++i;
                             } else {
-                                problem = !problem;
+                                cellInQuotes = !cellInQuotes;
                             }
                         } else if (symbol == ',') {
-                            if (problem) {
+                            if (cellInQuotes) {
                                 printWriter.print(",");
                             } else {
                                 printWriter.print("</td><td>");
                             }
+                        } else if (symbol == '<') {
+                            printWriter.print("&lt");
+                        } else if (symbol == '>') {
+                            printWriter.print("&gt");
+                        } else if (symbol == '&') {
+                            printWriter.print("&amp");
                         } else {
                             printWriter.print(symbol);
                         }
 
                     }
-                    if (problem) {
+                    if (cellInQuotes) {
                         printWriter.print("<br/>");
                     } else {
                         printWriter.print("</td></tr>");
