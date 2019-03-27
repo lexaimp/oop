@@ -21,6 +21,7 @@ public class ConvertingCsvToHtml {
         if (args.length != 2) {
             System.out.println("Передано неверное количество аргументов");
             System.out.println(getHelp());
+            return;
         }
         try (Scanner scanner = new Scanner(new FileReader(args[0]));
              PrintWriter printWriter = new PrintWriter(args[1])) {
