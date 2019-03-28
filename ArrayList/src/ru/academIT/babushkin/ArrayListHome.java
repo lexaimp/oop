@@ -7,7 +7,11 @@ import java.util.Scanner;
 
 public class ArrayListHome {
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(new FileReader("ArrayList/src/ru/academIT/babushkin/test.txt"))) {
+        if (args.length != 1) {
+            System.out.println("Передано неверное количество аргументов");
+            return;
+        }
+        try (Scanner scanner = new Scanner(new FileReader(args[0]))) {
             ArrayList<Integer> arrayList = new ArrayList<>();
             while (scanner.hasNextInt()) {
                 arrayList.add(scanner.nextInt());
@@ -22,9 +26,13 @@ public class ArrayListHome {
 
     private static void removeEvenNumber(ArrayList<Integer> arrayList) {
         for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i) % 2 == 0) {
+            while (arrayList.get(i) % 2 == 0) {
                 arrayList.remove(i);
             }
         }
+    }
+
+    private static ArrayList<Integer> deleteRepeat(ArrayList<Integer> arrayList) {
+        return null;
     }
 }
