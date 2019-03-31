@@ -19,6 +19,14 @@ public class ArrayListHome {
             System.out.println(arrayList);
             removeEvenNumber(arrayList);
             System.out.println(arrayList);
+            arrayList.add(0, 2);
+            arrayList.add(1, 18);
+            System.out.println(arrayList);
+            removeEvenNumber2(arrayList);
+            System.out.println(arrayList);
+
+            ArrayList<Integer> arrayListWithoutRepeat = deleteRepeat(arrayList);
+            System.out.println(arrayListWithoutRepeat);
         } catch (FileNotFoundException e) {
             System.out.println("Не удалось прочитать файл");
         }
@@ -32,7 +40,25 @@ public class ArrayListHome {
         }
     }
 
+    private static void removeEvenNumber2(ArrayList<Integer> arrayList) {
+        for (int i = arrayList.size() - 1; i >= 0; --i) {
+            if (arrayList.get(i) % 2 == 0) {
+                arrayList.remove(i);
+            }
+        }
+    }
+
     private static ArrayList<Integer> deleteRepeat(ArrayList<Integer> arrayList) {
-        return null;
+        if (arrayList.isEmpty()) {
+            return null;
+        }
+        ArrayList<Integer> copyArrayList = new ArrayList<>();
+        for (int i = arrayList.size() - 1; i >= 0; i--) {
+            int currentItem = arrayList.get(i);
+            if (arrayList.indexOf(currentItem) == arrayList.lastIndexOf(currentItem)) {
+                copyArrayList.add(currentItem);
+            }
+        }
+        return copyArrayList;
     }
 }
