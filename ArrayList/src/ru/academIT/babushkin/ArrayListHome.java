@@ -3,6 +3,7 @@ package ru.academIT.babushkin;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ArrayListHome {
@@ -12,20 +13,19 @@ public class ArrayListHome {
             return;
         }
         try (Scanner scanner = new Scanner(new FileReader(args[0]))) {
-            ArrayList<Integer> arrayList = new ArrayList<>();
-            while (scanner.hasNextInt()) {
-                arrayList.add(scanner.nextInt());
+            ArrayList<String> arrayList = new ArrayList<>();
+            while (scanner.hasNext()) {
+                arrayList.add(scanner.nextLine());
             }
             System.out.println(arrayList);
-            removeEvenNumber(arrayList);
-            System.out.println(arrayList);
-            arrayList.add(0, 2);
-            arrayList.add(1, 18);
-            System.out.println(arrayList);
-            removeEvenNumber2(arrayList);
-            System.out.println(arrayList);
 
-            ArrayList<Integer> arrayListWithoutRepeat = deleteRepeat(arrayList);
+            ArrayList<Integer> arrayList1 = new ArrayList<>(Arrays.asList(1, 2, 3, 8, 123, 5, 6, 6, 9, 98, 6, 3, 3));
+            System.out.println(arrayList1);
+
+            removeEvenNumber(arrayList1);
+            System.out.println(arrayList1);
+
+            ArrayList<Integer> arrayListWithoutRepeat = deleteRepeat(arrayList1);
             System.out.println(arrayListWithoutRepeat);
         } catch (FileNotFoundException e) {
             System.out.println("Не удалось прочитать файл");
@@ -33,14 +33,6 @@ public class ArrayListHome {
     }
 
     private static void removeEvenNumber(ArrayList<Integer> arrayList) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            while (arrayList.get(i) % 2 == 0) {
-                arrayList.remove(i);
-            }
-        }
-    }
-
-    private static void removeEvenNumber2(ArrayList<Integer> arrayList) {
         for (int i = arrayList.size() - 1; i >= 0; --i) {
             if (arrayList.get(i) % 2 == 0) {
                 arrayList.remove(i);
@@ -50,13 +42,12 @@ public class ArrayListHome {
 
     private static ArrayList<Integer> deleteRepeat(ArrayList<Integer> arrayList) {
         if (arrayList.isEmpty()) {
-            return null;
+            return new ArrayList<>();
         }
         ArrayList<Integer> copyArrayList = new ArrayList<>();
-        for (int i = arrayList.size() - 1; i >= 0; i--) {
-            int currentItem = arrayList.get(i);
-            if (arrayList.indexOf(currentItem) == arrayList.lastIndexOf(currentItem)) {
-                copyArrayList.add(currentItem);
+        for (Integer e : arrayList) {
+            if (!copyArrayList.contains(e)) {
+                copyArrayList.add(e);
             }
         }
         return copyArrayList;
