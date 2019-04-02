@@ -20,7 +20,7 @@ public class ListItem<T> {
         return data;
     }
 
-    public void setData(T data) {
+    void setData(T data) {
         this.data = data;
     }
 
@@ -28,7 +28,7 @@ public class ListItem<T> {
         return next;
     }
 
-    public void setNext(ListItem<T> next) {
+    void setNext(ListItem<T> next) {
         this.next = next;
     }
 }
