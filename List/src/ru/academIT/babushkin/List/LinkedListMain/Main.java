@@ -8,7 +8,7 @@ public class Main {
         list.add("a");
         list.add("b");
         list.add("с");
-        String a = list.getData(2);
+        String a = list.getData(1);
         System.out.println(a);
         System.out.println(list.size());
 
@@ -20,6 +20,8 @@ public class Main {
         System.out.println("________________________");
 
         SinglyLinkedList<String> list1 = new SinglyLinkedList<>();
-        System.out.println(list.removeItem(1));
+        list1.add("hey");
+        System.out.println(list1.removeItem(0));
+        System.out.println(list1.getData(0));
     }
 }

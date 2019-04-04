@@ -21,7 +21,7 @@ public class SinglyLinkedList<T> {
 
     private ListItem<T> findItem(int index) {
         if (count == 0) {
-            return head;
+            throw new NullPointerException("Список пуст");
         }
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Неправильно укзан индекс");
@@ -49,12 +49,19 @@ public class SinglyLinkedList<T> {
         return temp;
     }
 
-    //    todo Найти подходящий тип исключения если пвтаемся удалить элемент из пустого свписка
+    //    todo Найти подходящий тип исключения если пытаемся удалить элемент из пустого списка
     public T removeItem(int index) {
         if (size() == 0) {
+            throw new IllegalArgumentException("Нельзя удалить элемент из пустого списка");
         }
+
         T temp = getData(index);
-        findItem(index - 1).setNext(findItem(index).getNext());
+        if (index == 0) {
+            ListItem<T> p = head.getNext();
+            head = p;
+        } else {
+            findItem(index - 1).setNext(findItem(index).getNext());
+        }
         count--;
         return temp;
     }
