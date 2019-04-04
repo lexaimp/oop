@@ -1,7 +1,5 @@
 package ru.academIT.babushkin.List.LinkedList;
 
-import org.omg.CosNaming.NamingContextPackage.NotFound;
-
 public class SinglyLinkedList<T> {
     private ListItem<T> head;
     private int count;
@@ -49,19 +47,12 @@ public class SinglyLinkedList<T> {
         return temp;
     }
 
-    //    todo Найти подходящий тип исключения если пытаемся удалить элемент из пустого списка
     public T removeItem(int index) {
-        if (size() == 0) {
-            throw new IllegalArgumentException("Нельзя удалить элемент из пустого списка");
-        }
-
-        T temp = getData(index);
         if (index == 0) {
-            ListItem<T> p = head.getNext();
-            head = p;
-        } else {
-            findItem(index - 1).setNext(findItem(index).getNext());
+            return removeFirstItem();
         }
+        T temp = getData(index);
+        findItem(index - 1).setNext(findItem(index).getNext());
         count--;
         return temp;
     }
@@ -73,7 +64,41 @@ public class SinglyLinkedList<T> {
         count++;
     }
 
-    public void add(ListItem<T> listItem, int index) {
+    public void add(T data, int index) {
+        if (index == 0) {
+            this.add(data);
+        } else {
+            ListItem<T> p = new ListItem<>(data, findItem(index));
+            findItem(index - 1).setNext(p);
+        }
+        count++;
+    }
 
+    public boolean removeItem(T data) {
+        int index = 0;
+        for (ListItem<T> p = head; p != null; p = p.getNext()) {
+            if (p.getData().equals(data)) {
+                this.removeItem(index);
+                return true;
+            }
+            index++;
+        }
+        return false;
+    }
+
+    private T removeFirstItem() {
+        T temp = head.getData();
+        head = head.getNext();
+        count--;
+        return temp;
+    }
+
+    //  todo
+    public void reversList() {
+        ListItem<T> p = head;
+        while (p != null) {
+            ListItem<T> s = new ListItem<>();
+            p.getNext().setNext(p);
+        }
     }
 }

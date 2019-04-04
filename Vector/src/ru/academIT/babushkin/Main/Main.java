@@ -32,7 +32,7 @@ public class Main {
         vector2.difference(vector1);
         System.out.println("Разность векторов: " + vector2.toString());
 
-        vector2.setComponent(5.5, 5);
+        vector2.setComponent(5, 5);
         System.out.println("Компонента по номеру 5: " + vector2.getComponent(5));
 
         vector2.multiplyByScalar(5);

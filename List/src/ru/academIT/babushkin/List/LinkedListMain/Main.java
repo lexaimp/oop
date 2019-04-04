@@ -7,7 +7,7 @@ public class Main {
         SinglyLinkedList<String> list = new SinglyLinkedList<>();
         list.add("a");
         list.add("b");
-        list.add("с");
+        list.add("c");
         String a = list.getData(1);
         System.out.println(a);
         System.out.println(list.size());
@@ -22,6 +22,22 @@ public class Main {
         SinglyLinkedList<String> list1 = new SinglyLinkedList<>();
         list1.add("hey");
         System.out.println(list1.removeItem(0));
-        System.out.println(list1.getData(0));
+
+        System.out.println("________________________");
+        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2));
+        System.out.println();
+        list.add("Вася", 1);
+        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2) + ", " + list.getData(3));
+        System.out.println();
+
+
+        System.out.println(list.removeItem(0));
+        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2));
+        System.out.println();
+
+        System.out.println("________________________");
+        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2));
+        list.reversList();
+        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2));
     }
 }
