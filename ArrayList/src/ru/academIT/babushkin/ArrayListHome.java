@@ -41,9 +41,6 @@ public class ArrayListHome {
     }
 
     private static ArrayList<Integer> deleteRepeat(ArrayList<Integer> arrayList) {
-        if (arrayList.isEmpty()) {
-            return new ArrayList<>();
-        }
         ArrayList<Integer> copyArrayList = new ArrayList<>();
         for (Integer e : arrayList) {
             if (!copyArrayList.contains(e)) {
