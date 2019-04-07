@@ -93,12 +93,43 @@ public class SinglyLinkedList<T> {
         return temp;
     }
 
-    //  todo
     public void reversList() {
-        ListItem<T> p = head;
-        while (p != null) {
-            ListItem<T> s = new ListItem<>();
-            p.getNext().setNext(p);
+        if (size() == 0) {
+            throw new NullPointerException("Нельзя развернуть пустой список");
         }
+        ListItem<T> prev;
+        ListItem<T> p = head;
+        ListItem<T> next = p.getNext();
+        head.setNext(null);
+        while (next != null) {
+            prev = p;
+            p = next;
+            next = p.getNext();
+            p.setNext(prev);
+        }
+        head = p;
+    }
+//    todo
+    public SinglyLinkedList<T> copyList() {
+        ListItem<T> copyListItem = new ListItem<>();
+        SinglyLinkedList copyList = new SinglyLinkedList();
+        copyList.count = count;
+        copyList.head = copyListItem;
+        for (ListItem<T> p = head, prev = null; p != null; prev = copyListItem, p = p.getNext()) {
+            copyListItem.setData(p.getData());
+            copyListItem.setNext(prev);
+        }
+        return copyList;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("{");
+        for (ListItem<T> p = head; p != null; p = p.getNext()) {
+            stringBuilder.append(p.getData())
+                    .append(", ");
+        }
+        stringBuilder.setLength(stringBuilder.length() - 2);
+        return stringBuilder.append("}").toString();
     }
 }

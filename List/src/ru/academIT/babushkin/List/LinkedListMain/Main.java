@@ -24,20 +24,25 @@ public class Main {
         System.out.println(list1.removeItem(0));
 
         System.out.println("________________________");
-        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2));
+        System.out.print(list);
         System.out.println();
         list.add("Вася", 1);
-        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2) + ", " + list.getData(3));
+        System.out.print(list);
         System.out.println();
 
 
         System.out.println(list.removeItem(0));
-        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2));
+        System.out.print(list);
         System.out.println();
 
         System.out.println("________________________");
-        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2));
+        list.add("куку");
+        System.out.print(list);
         list.reversList();
-        System.out.print(list.getData(0) + ", " + list.getData(1) + ", " + list.getData(2));
+        System.out.println();
+        System.out.println(list);
+        SinglyLinkedList<String> copyList = list.copyList();
+        System.out.println(copyList);
+
     }
 }
