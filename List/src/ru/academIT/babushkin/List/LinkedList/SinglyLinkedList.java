@@ -8,11 +8,6 @@ public class SinglyLinkedList<T> {
         count = 0;
     }
 
-    public SinglyLinkedList(ListItem<T> head) {
-        this.head = head;
-        count = 1;
-    }
-
     public int size() {
         return count;
     }
@@ -59,8 +54,7 @@ public class SinglyLinkedList<T> {
 
 
     public void add(T data) {
-        ListItem<T> p = new ListItem<>(data, head);
-        head = p;
+        head = new ListItem<>(data, head);
         count++;
     }
 
@@ -109,16 +103,13 @@ public class SinglyLinkedList<T> {
         }
         head = p;
     }
-//    todo
+
     public SinglyLinkedList<T> copyList() {
-        ListItem<T> copyListItem = new ListItem<>();
-        SinglyLinkedList copyList = new SinglyLinkedList();
-        copyList.count = count;
-        copyList.head = copyListItem;
-        for (ListItem<T> p = head, prev = null; p != null; prev = copyListItem, p = p.getNext()) {
-            copyListItem.setData(p.getData());
-            copyListItem.setNext(prev);
+        SinglyLinkedList<T> copyList = new SinglyLinkedList<>();
+        for (ListItem<T> p = head; p != null; p = p.getNext()) {
+            copyList.add(p.getData());
         }
+        copyList.reversList();
         return copyList;
     }
 
