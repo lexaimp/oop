@@ -5,26 +5,26 @@ import ru.academIT.babushkin.List.LinkedList.*;
 public class Main {
     public static void main(String[] args) {
         SinglyLinkedList<String> list = new SinglyLinkedList<>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        String a = list.getData(1);
+        list.addToBeginning("a");
+        list.addToBeginning("b");
+        list.addToBeginning("c");
+        String a = list.getHeadData(1);
         System.out.println(a);
         System.out.println(list.size());
         System.out.println("________________________");
 
-        System.out.println(list.changeData("change", 2));
-        System.out.println(list.getData(2));
+        System.out.println(list.setData("change", 2));
+        System.out.println(list.getHeadData(2));
         System.out.println("________________________");
 
         SinglyLinkedList<String> list1 = new SinglyLinkedList<>();
-        list1.add("hey");
+        list1.addToBeginning("hey");
         System.out.println(list1.removeItem(0));
         System.out.println("________________________");
 
         System.out.print(list);
         System.out.println();
-        list.add("Вася", 1);
+        list.addToBeginning(1, "Вася");
         System.out.print(list);
         System.out.println();
         System.out.println("________________________");
@@ -34,10 +34,10 @@ public class Main {
         System.out.println();
         System.out.println("________________________");
 
-        list.add("куку");
+        list.addToBeginning("куку");
         System.out.println(list);
-        list.reversList();
-        System.out.println("revers");
+        list.reverse();
+        System.out.println("reverse");
         SinglyLinkedList<String> copyList = list.copyList();
         System.out.println(copyList);
         System.out.println("________________________");
@@ -45,6 +45,6 @@ public class Main {
         System.out.println(list.removeItem("Вася"));
         System.out.println(list);
         System.out.println(copyList);
-        System.out.println(copyList.getData());
+        System.out.println(copyList.getHeadData());
     }
 }

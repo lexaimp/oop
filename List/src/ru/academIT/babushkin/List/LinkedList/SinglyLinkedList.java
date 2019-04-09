@@ -1,3 +1,39 @@
+/* 1. Вынесите доп задачу в отдельный модуль, т.к. она не по курсу, и мешает проверять :) -
+
+        2. У списка метод getHeadData без аргументов - по имени не понятен смысл +
+
+        3. setData - лучше назвать setData +
+
+        4. При проверке индексов есть более подходящий тип исключения +
+
+        5. Методы с проверкой индекса - можно не проверять пустоту списка, там и так вылетит исключение +
+
+        6. findItem - у счетчика должно быть имя i +
+
+        7. Например, getHeadData без аргументов - должен кидать исключение если список пуст. + -
+        Некоторые другие методы тоже
+
+        8. setData - по факту сейчас обход списка делается дважды, это неэффективно
+
+        9. removeItem - можно обойтись одним обходом вместо 2
+
+        10. addToBeginning с индексом - есть ошибка.
+        И можно обойтись одним обходом.
+        Обход - дорогая операция, требует линейное время
+
+        11. removeItem(T) - не умеет работать с null данными.
+        И надо удалить за 1 проход
+
+        12. Разворот:
+        - опечатка в имени метода +
+        - в имени метода лишнее слово list, это и так класс списка +
+        - не должен падать на пустом списке
+
+        13. Копирование - нужно без разворота, за 1 проход
+
+        14. Имя метода addToBeginning - по имени не понятно, что это вставка в начало.
+        По умолчанию считается, что это вставка в конец */
+
 package ru.academIT.babushkin.List.LinkedList;
 
 public class SinglyLinkedList<T> {
@@ -13,31 +49,31 @@ public class SinglyLinkedList<T> {
     }
 
     private ListItem<T> findItem(int index) {
-        if (count == 0) {
-            throw new NullPointerException("Список пуст");
-        }
         if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Неправильно укзан индекс");
+            throw new IndexOutOfBoundsException("Неправильно укзан индекс");
         }
-        int count = 1;
+        int i = 1;
         ListItem<T> p = head;
-        while (count <= index) {
+        while (i <= index) {
             p = p.getNext();
-            count++;
+            i++;
         }
         return p;
     }
 
-    public T getData() {
+    public T getHeadData() {
+        if (size() == 0) {
+            throw new NullPointerException("Нельзя получить данные у пустого списка");
+        }
         return head.getData();
     }
 
-    public T getData(int index) {
+    public T getHeadData(int index) {
         return findItem(index).getData();
     }
 
-    public T changeData(T data, int index) {
-        T temp = getData(index);
+    public T setData(T data, int index) {
+        T temp = getHeadData(index);
         findItem(index).setData(data);
         return temp;
     }
@@ -46,21 +82,21 @@ public class SinglyLinkedList<T> {
         if (index == 0) {
             return removeFirstItem();
         }
-        T temp = getData(index);
+        T temp = getHeadData(index);
         findItem(index - 1).setNext(findItem(index).getNext());
         count--;
         return temp;
     }
 
 
-    public void add(T data) {
+    public void addToBeginning(T data) {
         head = new ListItem<>(data, head);
         count++;
     }
 
-    public void add(T data, int index) {
+    public void addToBeginning(int index, T data) {
         if (index == 0) {
-            this.add(data);
+            this.addToBeginning(data);
         } else {
             ListItem<T> p = new ListItem<>(data, findItem(index));
             findItem(index - 1).setNext(p);
@@ -87,7 +123,7 @@ public class SinglyLinkedList<T> {
         return temp;
     }
 
-    public void reversList() {
+    public void reverse() {
         if (size() == 0) {
             throw new NullPointerException("Нельзя развернуть пустой список");
         }
@@ -107,9 +143,9 @@ public class SinglyLinkedList<T> {
     public SinglyLinkedList<T> copyList() {
         SinglyLinkedList<T> copyList = new SinglyLinkedList<>();
         for (ListItem<T> p = head; p != null; p = p.getNext()) {
-            copyList.add(p.getData());
+            copyList.addToBeginning(p.getData());
         }
-        copyList.reversList();
+        copyList.reverse();
         return copyList;
     }
 
