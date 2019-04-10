@@ -1,6 +1,6 @@
 /* 1. Вынесите доп задачу в отдельный модуль, т.к. она не по курсу, и мешает проверять :) -
 
-        2. У списка метод getHeadData без аргументов - по имени не понятен смысл +
+        2. У списка метод getData без аргументов - по имени не понятен смысл +
 
         3. setData - лучше назвать setData +
 
@@ -10,14 +10,14 @@
 
         6. findItem - у счетчика должно быть имя i +
 
-        7. Например, getHeadData без аргументов - должен кидать исключение если список пуст. + -
+        7. Например, getData без аргументов - должен кидать исключение если список пуст. + -
         Некоторые другие методы тоже
 
-        8. setData - по факту сейчас обход списка делается дважды, это неэффективно
+        8. setData - по факту сейчас обход списка делается дважды, это неэффективно +
 
         9. removeItem - можно обойтись одним обходом вместо 2
 
-        10. addToBeginning с индексом - есть ошибка.
+        10. add с индексом - есть ошибка.
         И можно обойтись одним обходом.
         Обход - дорогая операция, требует линейное время
 
@@ -31,7 +31,7 @@
 
         13. Копирование - нужно без разворота, за 1 проход
 
-        14. Имя метода addToBeginning - по имени не понятно, что это вставка в начало.
+        14. Имя метода add - по имени не понятно, что это вставка в начало.
         По умолчанию считается, что это вставка в конец */
 
 package ru.academIT.babushkin.List.LinkedList;
@@ -68,13 +68,14 @@ public class SinglyLinkedList<T> {
         return head.getData();
     }
 
-    public T getHeadData(int index) {
+    public T getData(int index) {
         return findItem(index).getData();
     }
 
-    public T setData(T data, int index) {
-        T temp = getHeadData(index);
-        findItem(index).setData(data);
+    public T setData(int index, T data) {
+        ListItem<T> desiredItem = findItem(index);
+        T temp = desiredItem.getData();
+        desiredItem.setData(data);
         return temp;
     }
 
@@ -82,7 +83,7 @@ public class SinglyLinkedList<T> {
         if (index == 0) {
             return removeFirstItem();
         }
-        T temp = getHeadData(index);
+        T temp = getData(index);
         findItem(index - 1).setNext(findItem(index).getNext());
         count--;
         return temp;
@@ -94,7 +95,7 @@ public class SinglyLinkedList<T> {
         count++;
     }
 
-    public void addToBeginning(int index, T data) {
+    public void add(int index, T data) {
         if (index == 0) {
             this.addToBeginning(data);
         } else {

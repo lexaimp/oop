@@ -8,13 +8,13 @@ public class Main {
         list.addToBeginning("a");
         list.addToBeginning("b");
         list.addToBeginning("c");
-        String a = list.getHeadData(1);
+        String a = list.getData(1);
         System.out.println(a);
         System.out.println(list.size());
         System.out.println("________________________");
 
-        System.out.println(list.setData("change", 2));
-        System.out.println(list.getHeadData(2));
+        System.out.println(list.setData(2, "change"));
+        System.out.println(list.getData(2));
         System.out.println("________________________");
 
         SinglyLinkedList<String> list1 = new SinglyLinkedList<>();
@@ -24,7 +24,7 @@ public class Main {
 
         System.out.print(list);
         System.out.println();
-        list.addToBeginning(1, "Вася");
+        list.add(1, "Вася");
         System.out.print(list);
         System.out.println();
         System.out.println("________________________");
