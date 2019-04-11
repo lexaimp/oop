@@ -1,38 +1,9 @@
 /* 1. Вынесите доп задачу в отдельный модуль, т.к. она не по курсу, и мешает проверять :) -
 
-        2. У списка метод getData без аргументов - по имени не понятен смысл +
-
-        3. setData - лучше назвать setData +
-
-        4. При проверке индексов есть более подходящий тип исключения +
-
-        5. Методы с проверкой индекса - можно не проверять пустоту списка, там и так вылетит исключение +
-
-        6. findItem - у счетчика должно быть имя i +
-
-        7. Например, getData без аргументов - должен кидать исключение если список пуст. + -
-        Некоторые другие методы тоже
-
-        8. setData - по факту сейчас обход списка делается дважды, это неэффективно +
-
-        9. removeItem - можно обойтись одним обходом вместо 2
-
-        10. add с индексом - есть ошибка.
-        И можно обойтись одним обходом.
-        Обход - дорогая операция, требует линейное время
-
-        11. removeItem(T) - не умеет работать с null данными.
-        И надо удалить за 1 проход
-
-        12. Разворот:
-        - опечатка в имени метода +
-        - в имени метода лишнее слово list, это и так класс списка +
-        - не должен падать на пустом списке
-
         13. Копирование - нужно без разворота, за 1 проход
 
         14. Имя метода add - по имени не понятно, что это вставка в начало.
-        По умолчанию считается, что это вставка в конец */
+        По умолчанию считается, что это вставка в конец + */
 
 package ru.academIT.babushkin.List.LinkedList;
 
@@ -83,8 +54,9 @@ public class SinglyLinkedList<T> {
         if (index == 0) {
             return removeFirstItem();
         }
-        T temp = getData(index);
-        findItem(index - 1).setNext(findItem(index).getNext());
+        ListItem<T> prevItem = findItem(index - 1);
+        T temp = prevItem.getNext().getData();
+        prevItem.setNext(prevItem.getNext().getNext());
         count--;
         return temp;
     }
@@ -99,25 +71,36 @@ public class SinglyLinkedList<T> {
         if (index == 0) {
             this.addToBeginning(data);
         } else {
-            ListItem<T> p = new ListItem<>(data, findItem(index));
-            findItem(index - 1).setNext(p);
+            ListItem<T> temp = findItem(index - 1);
+            temp.setNext(new ListItem<>(data, temp.getNext()));
         }
         count++;
     }
 
     public boolean removeItem(T data) {
-        int index = 0;
-        for (ListItem<T> p = head; p != null; p = p.getNext()) {
+        for (ListItem<T> p = head, prev = null; p != null; prev = p, p = p.getNext()) {
             if (p.getData().equals(data)) {
-                this.removeItem(index);
+                if (prev == null) {
+                    clear();
+                    return true;
+                }
+                prev.setNext(p.getNext());
+                count--;
                 return true;
             }
-            index++;
         }
         return false;
     }
 
+    private void clear() {
+        head = null;
+        count = 0;
+    }
+
     private T removeFirstItem() {
+        if (size() == 0) {
+            throw new IllegalArgumentException("Спиок пуст");
+        }
         T temp = head.getData();
         head = head.getNext();
         count--;
@@ -126,7 +109,7 @@ public class SinglyLinkedList<T> {
 
     public void reverse() {
         if (size() == 0) {
-            throw new NullPointerException("Нельзя развернуть пустой список");
+            return;
         }
         ListItem<T> prev;
         ListItem<T> p = head;
@@ -141,7 +124,7 @@ public class SinglyLinkedList<T> {
         head = p;
     }
 
-    public SinglyLinkedList<T> copyList() {
+    public SinglyLinkedList<T> copy() {
         SinglyLinkedList<T> copyList = new SinglyLinkedList<>();
         for (ListItem<T> p = head; p != null; p = p.getNext()) {
             copyList.addToBeginning(p.getData());
