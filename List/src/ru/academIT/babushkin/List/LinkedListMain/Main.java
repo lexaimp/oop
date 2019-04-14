@@ -38,8 +38,13 @@ public class Main {
         System.out.println(list);
         list.reverse();
         System.out.println("reverse");
-        SinglyLinkedList<String> copyList = list.copy();
+        System.out.println(list);
+        SinglyLinkedList list2 = new SinglyLinkedList();
+        System.out.println(list2);
+        System.out.println("list1 = " + list1);
+        SinglyLinkedList<String> copyList = list1.copy();
         System.out.println(copyList);
+        System.out.println(copyList.size());
         System.out.println("________________________");
 
         System.out.println(list.size());

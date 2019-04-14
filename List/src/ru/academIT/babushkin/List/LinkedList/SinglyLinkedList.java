@@ -1,10 +1,3 @@
-/* 1. Вынесите доп задачу в отдельный модуль, т.к. она не по курсу, и мешает проверять :) -
-
-        13. Копирование - нужно без разворота, за 1 проход
-
-        14. Имя метода add - по имени не понятно, что это вставка в начало.
-        По умолчанию считается, что это вставка в конец + */
-
 package ru.academIT.babushkin.List.LinkedList;
 
 public class SinglyLinkedList<T> {
@@ -126,10 +119,21 @@ public class SinglyLinkedList<T> {
 
     public SinglyLinkedList<T> copy() {
         SinglyLinkedList<T> copyList = new SinglyLinkedList<>();
-        for (ListItem<T> p = head; p != null; p = p.getNext()) {
-            copyList.addToBeginning(p.getData());
+        if (head == null) {
+            return copyList;
         }
-        copyList.reverse();
+        ListItem<T> firstItem = new ListItem<>(head.getData(), null);
+        for (ListItem<T> p = head; p != null; p = p.getNext()) {
+            if (p == head) {
+                copyList.head = firstItem;
+                copyList.count++;
+                continue;
+            }
+            ListItem<T> copyItem = new ListItem<>(p.getData(), null);
+            firstItem.setNext(copyItem);
+            firstItem = copyItem;
+            copyList.count++;
+        }
         return copyList;
     }
 
@@ -140,7 +144,9 @@ public class SinglyLinkedList<T> {
             stringBuilder.append(p.getData())
                     .append(", ");
         }
-        stringBuilder.setLength(stringBuilder.length() - 2);
+        if (head != null) {
+            stringBuilder.setLength(stringBuilder.length() - 2);
+        }
         return stringBuilder.append("}").toString();
     }
 }

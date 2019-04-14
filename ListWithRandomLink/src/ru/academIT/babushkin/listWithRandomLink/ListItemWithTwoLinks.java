@@ -1,4 +1,6 @@
-package ru.academIT.babushkin.List.LinkedList;
+package ru.academIT.babushkin.listWithRandomLink;
+
+import ru.academIT.babushkin.List.LinkedList.ListItem;
 
 class ListItemWithTwoLinks<T> extends ListItem<T> {
     private ListItem<T> randomLink;

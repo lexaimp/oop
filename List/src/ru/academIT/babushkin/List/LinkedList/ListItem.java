@@ -1,10 +1,10 @@
 package ru.academIT.babushkin.List.LinkedList;
 
-class ListItem<T> {
+public class ListItem<T> {
     private T data;
     private ListItem<T> next;
 
-    ListItem(T data, ListItem<T> next) {
+    public ListItem(T data, ListItem<T> next) {
         this.data = data;
         this.next = next;
     }

@@ -36,4 +36,27 @@ public class Pair<K, V> {
         return k == pair.k && v == pair.v;
     }
 
+    public SinglyLinkedList<T> copy() {
+        SinglyLinkedList<T> listCopy = new SinglyLinkedList<>();
+        ListItem<T> first = head;
+        ListItem<T> second = first.getNext();
+        ListItem<T> item = new ListItem<>(head.getData(), null);
+        ListItem<T> nextItem;
+
+        while (second != null) {
+            if (first == head) {
+                listCopy.head = item;
+                listCopy.listSize++;
+            } else {
+                nextItem = new ListItem<>(first.getData(), null);
+                item.setNext(nextItem);
+                item = nextItem;
+                listCopy.listSize++;
+            }
+            first = second;
+            second = second.getNext();
+        }
+        return listCopy;
+    }
+
 }
