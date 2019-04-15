@@ -19,7 +19,9 @@ public class Main {
 
         SinglyLinkedList<String> list1 = new SinglyLinkedList<>();
         list1.addToBeginning("hey");
-        System.out.println(list1.removeItem(0));
+        list1.addToBeginning(null);
+        System.out.println(list1);
+        System.out.println(list1.removeItem(null));
         System.out.println("________________________");
 
         System.out.print(list);

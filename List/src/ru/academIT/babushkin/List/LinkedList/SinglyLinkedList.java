@@ -66,13 +66,13 @@ public class SinglyLinkedList<T> {
         } else {
             ListItem<T> temp = findItem(index - 1);
             temp.setNext(new ListItem<>(data, temp.getNext()));
+            count++;
         }
-        count++;
     }
 
     public boolean removeItem(T data) {
         for (ListItem<T> p = head, prev = null; p != null; prev = p, p = p.getNext()) {
-            if (p.getData().equals(data)) {
+            if (p.getData() == data || p.getData().equals(data)) {
                 if (prev == null) {
                     clear();
                     return true;
@@ -92,7 +92,7 @@ public class SinglyLinkedList<T> {
 
     private T removeFirstItem() {
         if (size() == 0) {
-            throw new IllegalArgumentException("Спиок пуст");
+            throw new IndexOutOfBoundsException("Спиок пуст");
         }
         T temp = head.getData();
         head = head.getNext();
@@ -104,12 +104,11 @@ public class SinglyLinkedList<T> {
         if (size() == 0) {
             return;
         }
-        ListItem<T> prev;
         ListItem<T> p = head;
         ListItem<T> next = p.getNext();
         head.setNext(null);
         while (next != null) {
-            prev = p;
+            ListItem<T> prev = p;
             p = next;
             next = p.getNext();
             p.setNext(prev);
@@ -122,16 +121,15 @@ public class SinglyLinkedList<T> {
         if (head == null) {
             return copyList;
         }
-        ListItem<T> firstItem = new ListItem<>(head.getData(), null);
+        ListItem<T> item = new ListItem<>(head.getData(), null);
         for (ListItem<T> p = head; p != null; p = p.getNext()) {
             if (p == head) {
-                copyList.head = firstItem;
-                copyList.count++;
-                continue;
+                copyList.head = item;
+            } else {
+                ListItem<T> copyItem = new ListItem<>(p.getData(), null);
+                item.setNext(copyItem);
+                item = copyItem;
             }
-            ListItem<T> copyItem = new ListItem<>(p.getData(), null);
-            firstItem.setNext(copyItem);
-            firstItem = copyItem;
             copyList.count++;
         }
         return copyList;
