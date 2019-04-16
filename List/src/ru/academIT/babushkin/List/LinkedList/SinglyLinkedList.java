@@ -1,4 +1,7 @@
+
 package ru.academIT.babushkin.List.LinkedList;
+
+import java.util.Objects;
 
 public class SinglyLinkedList<T> {
     private ListItem<T> head;
@@ -72,7 +75,7 @@ public class SinglyLinkedList<T> {
 
     public boolean removeItem(T data) {
         for (ListItem<T> p = head, prev = null; p != null; prev = p, p = p.getNext()) {
-            if (p.getData() == data || p.getData().equals(data)) {
+            if (Objects.equals(p.getData(), data)) {
                 if (prev == null) {
                     clear();
                     return true;
@@ -92,7 +95,7 @@ public class SinglyLinkedList<T> {
 
     private T removeFirstItem() {
         if (size() == 0) {
-            throw new IndexOutOfBoundsException("Спиок пуст");
+            throw new NullPointerException("Спиок пуст");
         }
         T temp = head.getData();
         head = head.getNext();
@@ -130,8 +133,8 @@ public class SinglyLinkedList<T> {
                 item.setNext(copyItem);
                 item = copyItem;
             }
-            copyList.count++;
         }
+        copyList.count = count;
         return copyList;
     }
 
