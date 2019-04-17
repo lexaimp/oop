@@ -50,7 +50,8 @@ public class Main {
         System.out.println("________________________");
 
         System.out.println(list.size());
-        System.out.println(list.removeItem("Вася"));
+        System.out.println(list);
+        System.out.println(list.removeItem("change"));
         System.out.println(list.size());
         System.out.println(list);
         System.out.println(copyList);

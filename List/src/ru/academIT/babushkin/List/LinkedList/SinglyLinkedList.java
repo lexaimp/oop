@@ -77,7 +77,7 @@ public class SinglyLinkedList<T> {
         for (ListItem<T> p = head, prev = null; p != null; prev = p, p = p.getNext()) {
             if (Objects.equals(p.getData(), data)) {
                 if (prev == null) {
-                    clear();
+                    shiftHead();
                     return true;
                 }
                 prev.setNext(p.getNext());
@@ -88,9 +88,9 @@ public class SinglyLinkedList<T> {
         return false;
     }
 
-    private void clear() {
-        head = null;
-        count = 0;
+    private void shiftHead() {
+        head = head.getNext();
+        count--;
     }
 
     private T removeFirstItem() {
