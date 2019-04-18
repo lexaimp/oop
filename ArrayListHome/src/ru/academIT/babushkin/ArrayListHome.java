@@ -1,4 +1,4 @@
-package ru.academIT.babushkin.arrayListHome;
+package ru.academIT.babushkin;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

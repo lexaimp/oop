@@ -1,21 +1,27 @@
 package ru.academIT.babushkin.ArrayList;
 
 import java.util.*;
-import java.util.function.UnaryOperator;
 
 public class ArrayList<T> implements List<T> {
-    private T[] array;
-    private int length;
+    private T[] items;
+    private int size;
+    private int modCount = 0;
+
+    public ArrayList(int capacity) {
+        if (capacity > 0) {
+            items = (T[]) new Object[capacity]; //Задать вопрос Павлу
+        }
+    }
 
 
     @Override
     public int size() {
-        return length;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return (length == 0);
+        return (size == 0);
     }
 
     @Override
@@ -25,7 +31,28 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<T>() {
+            int initialModCount = modCount;
+            private int currentIndex = -1;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex + 1 < size();
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException("Нет такого элемента");
+                }
+                if (initialModCount == modCount) {
+                    currentIndex++;
+                    return items[currentIndex];
+                } else {
+                    throw new ConcurrentModificationException();
+                }
+            }
+        };
     }
 
     @Override
@@ -34,13 +61,15 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public <T1> T1[] toArray(T1[] t1s) {
+    public <T1> T1[] toArray(T1[] a) {
         return null;
     }
 
     @Override
     public boolean add(T t) {
-        return false;
+        if (size == items.length) {
+        }
+            return false;
     }
 
     @Override
@@ -49,38 +78,28 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> collection) {
+    public boolean containsAll(Collection<?> c) {
         return false;
     }
 
     @Override
-    public boolean addAll(Collection<? extends T> collection) {
+    public boolean addAll(Collection<? extends T> c) {
         return false;
     }
 
     @Override
-    public boolean addAll(int i, Collection<? extends T> collection) {
+    public boolean addAll(int index, Collection<? extends T> c) {
         return false;
     }
 
     @Override
-    public boolean removeAll(Collection<?> collection) {
+    public boolean removeAll(Collection<?> c) {
         return false;
     }
 
     @Override
-    public boolean retainAll(Collection<?> collection) {
+    public boolean retainAll(Collection<?> c) {
         return false;
-    }
-
-    @Override
-    public void replaceAll(UnaryOperator<T> unaryOperator) {
-
-    }
-
-    @Override
-    public void sort(Comparator<? super T> comparator) {
-
     }
 
     @Override
@@ -89,22 +108,22 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public T get(int i) {
+    public T get(int index) {
         return null;
     }
 
     @Override
-    public T set(int i, T t) {
+    public T set(int index, T element) {
         return null;
     }
 
     @Override
-    public void add(int i, T t) {
+    public void add(int index, T element) {
 
     }
 
     @Override
-    public T remove(int i) {
+    public T remove(int index) {
         return null;
     }
 
@@ -124,17 +143,12 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public ListIterator<T> listIterator(int i) {
+    public ListIterator<T> listIterator(int index) {
         return null;
     }
 
     @Override
-    public List<T> subList(int i, int i1) {
-        return null;
-    }
-
-    @Override
-    public Spliterator<T> spliterator() {
+    public List<T> subList(int fromIndex, int toIndex) {
         return null;
     }
 }

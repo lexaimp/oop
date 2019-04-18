@@ -1,7 +1,7 @@
 package ru.academIT.babushkin.Main;
 
 import ru.academIT.babushkin.Matrix.*;
-import ru.academIT.babushkin.Vector.Vector;
+import ru.academIT.babushkin.Vector.*;
 
 public class Main {
     public static void main(String[] args) {
