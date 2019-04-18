@@ -1,4 +1,3 @@
-//3. Умножение матриц - setRow лучше не вызывать, он создает копию
 package ru.academIT.babushkin.Matrix;
 
 import ru.academIT.babushkin.Vector.*;

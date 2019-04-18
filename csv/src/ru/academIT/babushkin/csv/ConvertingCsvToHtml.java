@@ -3,6 +3,7 @@ package ru.academIT.babushkin.csv;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 public class ConvertingCsvToHtml {
@@ -24,7 +25,7 @@ public class ConvertingCsvToHtml {
             return;
         }
         try (Scanner scanner = new Scanner(new FileReader(args[0]));
-             PrintWriter printWriter = new PrintWriter(args[1])) {
+             PrintWriter printWriter = new PrintWriter(args[1], "windows-1251")) {
             String ls = System.lineSeparator();
             printWriter.print("<!DOCTYPE html>" + ls +
                     "<html>" + ls +
@@ -82,6 +83,8 @@ public class ConvertingCsvToHtml {
                     "</html>");
         } catch (FileNotFoundException notFound) {
             System.out.println("Не удалось найти файл");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
