@@ -22,6 +22,7 @@ public class Main {
         list1.addToBeginning(null);
         System.out.println(list1);
         System.out.println(list1.removeItem(null));
+        System.out.println(list1);
         System.out.println("________________________");
 
         System.out.print(list);
