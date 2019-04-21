@@ -6,6 +6,5 @@ public class Main {
         System.out.println(i);
         i = i >> 1;
         System.out.println(i);
-        ArrayList
     }
 }
