@@ -4,13 +4,16 @@ import java.util.*;
 
 public class ArrayList<T> implements List<T> {
     private T[] items;
-    private int size;
+    private static final int DEFAULT_CAPACITY = 10;
+    private int size = 0;
     private int modCount = 0;
 
-    public ArrayList(int capacity) {
-        if (capacity > 0) {
-            items = (T[]) new Object[capacity]; //Задать вопрос Павлу
+    @SuppressWarnings("unchecked")
+    ArrayList(int capacity) {
+        if (capacity < 0) {
+            throw new IllegalArgumentException("Вместимость списка не может быть меньше 0");
         }
+        items = (T[]) new Object[capacity];
     }
 
 
@@ -26,6 +29,11 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean contains(Object o) {
+        for (T t : this) {
+            if (Objects.equals(t, o)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -67,9 +75,13 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean add(T t) {
+        modCount++;
         if (size == items.length) {
+            items = Arrays.copyOf(items, size + 10);
         }
-            return false;
+        items[size] = t;
+        size++;
+        return true;
     }
 
     @Override
@@ -150,5 +162,18 @@ public class ArrayList<T> implements List<T> {
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("[");
+        for (T t : this) {
+            stringBuilder.append(t)
+                    .append(", ");
+        }
+        if (size != 0) {
+            stringBuilder.setLength(stringBuilder.length() - 2);
+        }
+        return stringBuilder.append("]").toString();
     }
 }
