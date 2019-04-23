@@ -61,15 +61,6 @@ public class ArrayList<T> implements List<T> {
                     throw new ConcurrentModificationException();
                 }
             }
-
-            @Override
-//            todo
-            public void remove() {
-                if (hasNext()) {
-                    items[++currentIndex] = next();
-                }
-                size--;
-            }
         };
     }
 
@@ -104,9 +95,11 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean remove(Object o) {
-        for (T t : this) {
-            if (Objects.equals(t, o)) {
-                iterator().remove();
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(o, items[i])) {
+                System.arraycopy(items, i + 1, items, i, size - i);
+                size--;
+                modCount++;
                 return true;
             }
         }
