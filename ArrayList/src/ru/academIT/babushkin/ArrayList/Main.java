@@ -6,7 +6,11 @@ public class Main {
         arrayList.add("Hi");
         arrayList.add("how are you?");
         arrayList.add(null);
+        arrayList.add("z");
         System.out.println(arrayList);
         System.out.println(arrayList.contains("how are you?"));
+        System.out.println(arrayList);
+        System.out.println(arrayList.remove("z"));
+        System.out.println(arrayList);
     }
 }

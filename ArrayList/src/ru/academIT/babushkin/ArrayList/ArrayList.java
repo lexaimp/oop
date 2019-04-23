@@ -1,6 +1,7 @@
 package ru.academIT.babushkin.ArrayList;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class ArrayList<T> implements List<T> {
     private T[] items;
@@ -60,17 +61,34 @@ public class ArrayList<T> implements List<T> {
                     throw new ConcurrentModificationException();
                 }
             }
+
+            @Override
+//            todo
+            public void remove() {
+                if (hasNext()) {
+                    items[++currentIndex] = next();
+                }
+                size--;
+            }
         };
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return Arrays.copyOf(items, size);
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        if (size > a.length) {
+            return Arrays.copyOf(a, a.length);
+        } else {
+            System.arraycopy(items, 0, a, 0, size);
+            if (a.length > size) {
+                a[this.size] = null;
+            }
+            return a;
+        }
     }
 
     @Override
@@ -86,6 +104,12 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean remove(Object o) {
+        for (T t : this) {
+            if (Objects.equals(t, o)) {
+                iterator().remove();
+                return true;
+            }
+        }
         return false;
     }
 
