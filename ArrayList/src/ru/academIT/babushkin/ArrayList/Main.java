@@ -11,7 +11,7 @@ public class Main {
         System.out.println(arrayList);
         System.out.println(arrayList.contains("how are you?"));
         System.out.println(arrayList);
-        System.out.println(arrayList.remove("hi"));
+        System.out.println(arrayList.remove("f"));
         System.out.println(arrayList);
     }
 }
