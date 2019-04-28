@@ -152,6 +152,9 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
+        if (index < 0 || index > size + c.size()) {
+            throw new IllegalArgumentException("Index incorrect");
+        }
         if (c.isEmpty()) {
             return false;
         }
