@@ -1,11 +1,9 @@
 package ru.academIT.babushkin.ArrayList;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public class ArrayList<T> implements List<T> {
     private T[] items;
-    private static final int DEFAULT_CAPACITY = 10;
     private int size = 0;
     private int modCount = 0;
 
@@ -114,16 +112,27 @@ public class ArrayList<T> implements List<T> {
         return false;
     }
 
+    private void ensureCapacityInternal(int capacity) {
+        if (capacity <= size) {
+            return;
+        }
+        modCount++;
+        items = Arrays.copyOf(items, capacity);
+    }
+
     @Override
     public boolean containsAll(Collection<?> c) {
         boolean contains = false;
-        for (T t : this) {
+        for (Object o : c) {
             contains = false;
-            for (Object o : c) {
-                if (Objects.equals(t, o)){
+            for (T t : this) {
+                if (Objects.equals(o, t)) {
                     contains = true;
                     break;
                 }
+            }
+            if (!contains) {
+                return false;
             }
         }
         return contains;
@@ -131,12 +140,32 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        if (c.isEmpty()) {
+            return false;
+        }
+        ensureCapacityInternal(size + c.size());
+        for (T t : c) {
+            this.add(t);
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
+        if (c.isEmpty()) {
+            return false;
+        }
+        if (index == size) {
+            return (addAll(c));
+        }
+        ensureCapacityInternal(size + c.size());
+        System.arraycopy(items, index, items, index + c.size(), size - index);
+        for (T o : c) {
+            items[index++] = o;
+        }
+        modCount++;
+        size += c.size();
+        return true;
     }
 
     @Override
