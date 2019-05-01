@@ -120,6 +120,12 @@ public class ArrayList<T> implements List<T> {
         items = Arrays.copyOf(items, capacity);
     }
 
+    void trimToSize() {
+        if (size < items.length) {
+            items = Arrays.copyOf(items, size);
+        }
+    }
+
     @Override
     public boolean containsAll(Collection<?> c) {
         boolean contains = false;
@@ -153,7 +159,7 @@ public class ArrayList<T> implements List<T> {
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         if (index < 0 || index > size + c.size()) {
-            throw new IllegalArgumentException("Index incorrect");
+            throw new IndexOutOfBoundsException("Index incorrect");
         }
         if (c.isEmpty()) {
             return false;
@@ -173,47 +179,105 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        int modCount = this.modCount;
+        for (Object o : c) {
+            remove(o);
+        }
+        return modCount != this.modCount;
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        int modCount = this.modCount;
+        int i = 0;
+        while (i < size) {
+            if (!contains(i)) {
+                remove(i);
+            }
+            i++;
+        }
+        return modCount != this.modCount;
     }
 
     @Override
     public void clear() {
-
+        if (isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < size; i++) {
+            items[i] = null;
+        }
+        size = 0;
+        modCount++;
     }
 
     @Override
     public T get(int index) {
-        return null;
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException("Index incorrect");
+        }
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Collection is empty");
+        }
+        return items[index];
     }
 
     @Override
     public T set(int index, T element) {
-        return null;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index incorrect");
+        }
+        T itemCopy = items[index];
+        items[index] = element;
+        return itemCopy;
     }
 
     @Override
     public void add(int index, T element) {
-
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index incorrect");
+        }
+        if (index == size) {
+            add(element);
+            return;
+        }
+        modCount++;
+        ensureCapacityInternal(size + 1);
+        System.arraycopy(items, index, items, index + 1, size - index);
+        items[index] = element;
+        size++;
     }
 
     @Override
     public T remove(int index) {
-        return null;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index incorrect");
+        }
+        T itemCopy = items[index];
+        System.arraycopy(items, index + 1, items, index, size - index);
+        size--;
+        modCount++;
+        return itemCopy;
     }
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(items[i], o)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        for (int i = size - 1; i != 0; i--) {
+            if (Objects.equals(items[i], o)) {
+                return size - i;
+            }
+        }
+        return -1;
     }
 
     @Override
