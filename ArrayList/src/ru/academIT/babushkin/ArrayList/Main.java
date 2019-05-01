@@ -11,12 +11,16 @@ public class Main {
         arrayList.add("z");
 
         System.out.println(arrayList);
+
         ArrayList<String> arrayList1 = new ArrayList<>(2);
         arrayList1.add("hey");
         arrayList1.add("f");
+
         System.out.println(arrayList1);
         System.out.println(arrayList.retainAll(arrayList1));
         System.out.println(arrayList);
+
         arrayList.trimToSize();
+        System.out.println(arrayList.size());
     }
 }
