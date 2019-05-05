@@ -1,4 +1,6 @@
-package ru.academIT.babushkin.ArrayList;
+package ru.academIT.babushkin.Main;
+
+import ru.academIT.babushkin.ArrayList.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,12 +14,12 @@ public class Main {
 
         System.out.println(arrayList);
 
-        ArrayList<String> arrayList1 = new ArrayList<>(2);
-        arrayList1.add("hey");
-        arrayList1.add("f");
-
+        ArrayList<String> arrayList1 = new ArrayList<>();
+        arrayList1.add("Hi");
+        arrayList1.add("j");
         System.out.println(arrayList1);
-        System.out.println(arrayList.retainAll(arrayList1));
+
+        System.out.println("retain: " + arrayList.retainAll(arrayList1));
         System.out.println(arrayList);
 
         arrayList.trimToSize();
