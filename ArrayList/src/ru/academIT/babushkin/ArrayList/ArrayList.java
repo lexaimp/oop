@@ -1,50 +1,3 @@
-//1. Класс с main надо вынести в отдельный пакет +
-//
-//2. Надо еще сделать конструктор без аргументов +
-//
-//3. contains лучше реализовать через indexOf +
-//
-//4. Итератор:
-//- поля должны быть private +
-//- remove лучше не делать, есть ошибки в реализации. +
-//И этот remove не требуется по задаче +
-//- ветки с исключением лучше ставить раньше +
-//
-//5. toArray(T1[]):
-//- надо заглушить warning +
-//- в первой ветке надо передать третий аргумент a.getClass() +
-//
-//6. add - не стоит увеличивать размер на фиксированное число, надо именно умножать +
-//
-//7. remove надо сделать без итератора +
-//
-//8. trimToSize должен быть public +
-//
-//9. ensure не должен менять mod count +
-//
-//10. containsAll надо просто реализовать через contains +
-//
-//11. addAll - неэффективно использовать add, лучше самим сделать логику +
-//
-//12. addAll с индексом: +
-//- неверно проверяется индекс +
-//- плохо использовать ++ как выражение +
-//- лишние скобки при вызове addAll +
-//
-//13. removeAll должен удалять все вхождения +
-//
-//14. retainAll - есть ошибка
-//
-//15. Вместо > size - 1 лучше писать >= size, это более понятное и простое условие
-//
-//16. Методы с индексом - не нужно проверять на пустоту
-//
-//17. add с индексом - неверно увеличивать массив всего на 1
-//
-//18. remove - есть ошибка
-//
-//19. lastIndexOf - есть ошибки
-
 package ru.academIT.babushkin.ArrayList;
 
 import java.util.*;
@@ -66,7 +19,6 @@ public class ArrayList<T> implements List<T> {
         }
         items = (T[]) new Object[capacity];
     }
-
 
     @Override
     public int size() {
@@ -220,16 +172,21 @@ public class ArrayList<T> implements List<T> {
         return modCount != this.modCount;
     }
 
-    //14. retainAll - есть ошибка
     @Override
     public boolean retainAll(Collection<?> c) {
         int modCount = this.modCount;
-        int i = 0;
-        while (i < size) {
-            if (!contains(i)) {
-                remove(i);
+        for (int i = 0; i < size; i++) {
+            boolean flag = false;
+            for (Object o : c) {
+                if (Objects.equals(items[i], o)) {
+                    flag = true;
+                    break;
+                }
             }
-            i++;
+            if (!flag) {
+                remove(i);
+                i--;
+            }
         }
         return modCount != this.modCount;
     }
@@ -248,11 +205,8 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index > size - 1) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index incorrect");
-        }
-        if (isEmpty()) {
-            throw new IllegalArgumentException("Collection is empty");
         }
         return items[index];
     }
@@ -277,7 +231,7 @@ public class ArrayList<T> implements List<T> {
             return;
         }
         modCount++;
-        ensureCapacityInternal(size + 1);
+        ensureCapacityInternal(size * 2);
         System.arraycopy(items, index, items, index + 1, size - index);
         items[index] = element;
         size++;
@@ -289,9 +243,13 @@ public class ArrayList<T> implements List<T> {
             throw new IndexOutOfBoundsException("Index incorrect");
         }
         T itemCopy = items[index];
-        System.arraycopy(items, index + 1, items, index, size - index);
-        size--;
-        modCount++;
+        if (size == 1) {
+            clear();
+        } else {
+            System.arraycopy(items, index + 1, items, index, size - index);
+            size--;
+            modCount++;
+        }
         return itemCopy;
     }
 
@@ -307,9 +265,9 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public int lastIndexOf(Object o) {
-        for (int i = size - 1; i != 0; i--) {
+        for (int i = size - 1; i >= 0; i--) {
             if (Objects.equals(items[i], o)) {
-                return size - i;
+                return i;
             }
         }
         return -1;

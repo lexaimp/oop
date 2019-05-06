@@ -11,16 +11,16 @@ public class Main {
         arrayList.add("f");
         arrayList.add(null);
         arrayList.add("z");
+        arrayList.add("x");
+
 
         System.out.println(arrayList);
 
         ArrayList<String> arrayList1 = new ArrayList<>();
         arrayList1.add("Hi");
-        arrayList1.add("j");
         System.out.println(arrayList1);
 
-        System.out.println("retain: " + arrayList.retainAll(arrayList1));
-        System.out.println(arrayList);
+        System.out.println(arrayList.lastIndexOf("f"));
 
         arrayList.trimToSize();
         System.out.println(arrayList.size());
