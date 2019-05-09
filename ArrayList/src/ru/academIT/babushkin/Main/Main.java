@@ -12,17 +12,19 @@ public class Main {
         arrayList.add(null);
         arrayList.add("z");
         arrayList.add("x");
-
-
         System.out.println(arrayList);
 
         ArrayList<String> arrayList1 = new ArrayList<>();
         arrayList1.add("Hi");
+        arrayList1.add("f");
         System.out.println(arrayList1);
 
-        System.out.println(arrayList.lastIndexOf("f"));
+        System.out.println(arrayList.retainAll(arrayList1));
+        System.out.println(arrayList);
 
         arrayList.trimToSize();
+        arrayList.remove(0);
+        System.out.println(arrayList);
         System.out.println(arrayList.size());
     }
 }

@@ -14,8 +14,8 @@ public class ArrayList<T> implements List<T> {
 
     @SuppressWarnings("unchecked")
     public ArrayList(int capacity) {
-        if (capacity < 0) {
-            throw new IllegalArgumentException("Вместимость списка не может быть меньше 0");
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Вместимость списка не может быть меньше 1");
         }
         items = (T[]) new Object[capacity];
     }
@@ -53,10 +53,9 @@ public class ArrayList<T> implements List<T> {
                 }
                 if (initialModCount != modCount) {
                     throw new ConcurrentModificationException();
-                } else {
-                    currentIndex++;
-                    return items[currentIndex];
                 }
+                currentIndex++;
+                return items[currentIndex];
             }
         };
     }
@@ -66,18 +65,17 @@ public class ArrayList<T> implements List<T> {
         return Arrays.copyOf(items, size);
     }
 
+    @SuppressWarnings({"unchecked", "SuspiciousSystemArraycopy"})
     @Override
     public <T1> T1[] toArray(T1[] a) {
         if (size > a.length) {
-            return Arrays.copyOf(a, a.length);
-        } else {
-            //noinspection SuspiciousSystemArraycopy
-            System.arraycopy(items, 0, a.getClass(), 0, size);
-            if (a.length > size) {
-                a[this.size] = null;
-            }
-            return a;
+            return (T1[]) Arrays.copyOf(a, a.length, a.getClass());
         }
+        System.arraycopy(items, 0, a, 0, size);
+        if (a.length > size) {
+            a[this.size] = null;
+        }
+        return a;
     }
 
     @Override
@@ -97,7 +95,8 @@ public class ArrayList<T> implements List<T> {
         if (index == -1) {
             return false;
         }
-        return (remove(index) != null);
+        remove(index);
+        return true;
     }
 
     private void ensureCapacityInternal(int capacity) {
@@ -125,15 +124,7 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        if (c.isEmpty()) {
-            return false;
-        }
-        ensureCapacityInternal(size + c.size());
-        //noinspection SuspiciousSystemArraycopy
-        System.arraycopy(c.toArray(), 0, items, size, c.size());
-        size += c.size();
-        modCount++;
-        return true;
+        return addAll(size, c);
     }
 
     @Override
@@ -144,14 +135,16 @@ public class ArrayList<T> implements List<T> {
         if (c.isEmpty()) {
             return false;
         }
-        if (index == size) {
-            return addAll(c);
-        }
+
         ensureCapacityInternal(size + c.size());
-        System.arraycopy(items, index, items, index + c.size(), size - index);
+        if (index != size) {
+            System.arraycopy(items, index, items, index + c.size(), size - index);
+        }
+
+        int i = index;
         for (T o : c) {
-            items[index] = o;
-            index++;
+            items[i] = o;
+            i++;
         }
         modCount++;
         size += c.size();
@@ -176,14 +169,7 @@ public class ArrayList<T> implements List<T> {
     public boolean retainAll(Collection<?> c) {
         int modCount = this.modCount;
         for (int i = 0; i < size; i++) {
-            boolean flag = false;
-            for (Object o : c) {
-                if (Objects.equals(items[i], o)) {
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
+            if (!c.contains(items[i])) {
                 remove(i);
                 i--;
             }
@@ -243,13 +229,13 @@ public class ArrayList<T> implements List<T> {
             throw new IndexOutOfBoundsException("Index incorrect");
         }
         T itemCopy = items[index];
-        if (size == 1) {
-            clear();
+        if (index == size - 1) {
+            items[index] = null;
         } else {
-            System.arraycopy(items, index + 1, items, index, size - index);
-            size--;
-            modCount++;
+            System.arraycopy(items, index + 1, items, index, (size - 1) - index);
         }
+        size--;
+        modCount++;
         return itemCopy;
     }
 
