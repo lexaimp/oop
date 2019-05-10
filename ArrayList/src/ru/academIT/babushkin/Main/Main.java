@@ -26,5 +26,11 @@ public class Main {
         arrayList.remove(0);
         System.out.println(arrayList);
         System.out.println(arrayList.size());
+
+        String[] array = {"a", "b", "c", "d"};
+        String[] array2 = arrayList.toArray(array);
+        for (String e: array2) {
+            System.out.println(e);
+        }
     }
 }

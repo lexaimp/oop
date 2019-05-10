@@ -65,11 +65,11 @@ public class ArrayList<T> implements List<T> {
         return Arrays.copyOf(items, size);
     }
 
-    @SuppressWarnings({"unchecked", "SuspiciousSystemArraycopy"})
+    @SuppressWarnings("unchecked")
     @Override
     public <T1> T1[] toArray(T1[] a) {
         if (size > a.length) {
-            return (T1[]) Arrays.copyOf(a, a.length, a.getClass());
+            return (T1[]) Arrays.copyOf(items, size, a.getClass());
         }
         System.arraycopy(items, 0, a, 0, size);
         if (a.length > size) {
