@@ -7,6 +7,7 @@ public class Main {
         HashTable<String> hashTable = new HashTable<>(30);
         hashTable.add("a");
         hashTable.add("n");
+        hashTable.add("s");
         System.out.println(hashTable);
     }
 }

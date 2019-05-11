@@ -33,6 +33,11 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean contains(Object o) {
+        for (Object e : this) {
+            if (Objects.equals(e, o)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -48,7 +53,8 @@ public class HashTable<E> implements Collection<E> {
             public boolean hasNext() {
                 return currentNodeCount < size;
             }
-//todo
+
+            //todo
             @Override
             public E next() {
                 if (!hasNext()) {
@@ -57,11 +63,11 @@ public class HashTable<E> implements Collection<E> {
                 if (initialModCount != modCount) {
                     throw new ConcurrentModificationException("Произошло изменение во время обхода коллекции");
                 }
-                while (items[currentArrayIndex] == null) {
+                if (items[currentArrayIndex] == null || items[currentArrayIndex].size() - 1 == currentItemIndex) {
+                    currentItemIndex = -1;
                     currentArrayIndex++;
                 }
-                if (items[currentArrayIndex].size() - 1 == currentItemIndex) {
-                    currentItemIndex = -1;
+                while (items[currentArrayIndex] == null) {
                     currentArrayIndex++;
                 }
                 currentNodeCount++;
@@ -73,12 +79,26 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] array = new Object[size];
+        int i = 0;
+        for (Object e : this) {
+            array[i] = e;
+            i++;
+        }
+        return array;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
+        if (size > a.length) {
+            return (T[]) Arrays.copyOf(toArray(), size, a.getClass());
+        }
+        System.arraycopy(toArray(), 0, a, 0, size);
+        if (a.length > size) {
+            a[this.size] = null;
+        }
+        return a;
     }
 
     @Override
