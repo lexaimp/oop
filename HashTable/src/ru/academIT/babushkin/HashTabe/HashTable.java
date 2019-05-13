@@ -33,12 +33,9 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean contains(Object o) {
-        for (Object e : this) {
-            if (Objects.equals(e, o)) {
-                return true;
-            }
-        }
-        return false;
+        //noinspection unchecked
+        int key = getKey((E) o);
+        return items[key] != null && items[key].contains(o);
     }
 
     @Override
@@ -127,12 +124,23 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        for (Object o : c) {
+            if (!contains(o)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        if (c.isEmpty()) {
+            return false;
+        }
+        for (E e : c) {
+            add(e);
+        }
+        return true;
     }
 
     @Override
