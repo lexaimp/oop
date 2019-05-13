@@ -88,7 +88,7 @@ public class HashTable<E> implements Collection<E> {
         return array;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "SuspiciousSystemArraycopy"})
     @Override
     public <T> T[] toArray(T[] a) {
         if (size > a.length) {
@@ -115,6 +115,13 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean remove(Object o) {
+        //noinspection unchecked
+        int key = getKey((E) o);
+        if (items[key] != null) {
+            return items[key].remove(o);
+        }
+        size--;
+        modCount++;
         return false;
     }
 
