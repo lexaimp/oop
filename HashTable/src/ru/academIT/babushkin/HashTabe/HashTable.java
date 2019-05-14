@@ -143,14 +143,28 @@ public class HashTable<E> implements Collection<E> {
         return true;
     }
 
+    @SuppressWarnings({"SuspiciousMethodCalls", "unchecked"})
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        int modCount = this.modCount;
+        for (Object o : c) {
+            int key = getKey((E) o);
+            while (items[key].remove(o)) {
+                size--;
+                this.modCount++;
+            }
+        }
+        return modCount != this.modCount;
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        int modCount = this.modCount;
+        for (E e : this) {
+            if (!c.contains(e)) {
+            }
+        }
+        return modCount != this.modCount;
     }
 
     @Override
