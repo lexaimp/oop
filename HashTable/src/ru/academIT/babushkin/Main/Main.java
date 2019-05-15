@@ -2,12 +2,36 @@ package ru.academIT.babushkin.Main;
 
 import ru.academIT.babushkin.HashTabe.HashTable;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String args[]) {
-        HashTable<String> hashTable = new HashTable<>(30);
-        hashTable.add("a");
-        hashTable.add("n");
-        hashTable.add("s");
+        HashTable<Integer> hashTable = new HashTable<>(30);
+        HashTable<Integer> hashTable1 = new HashTable<>();
+        for (int i = 0; i < 24; i++) {
+            hashTable.add((int) (Math.random() * 30));
+            hashTable1.add((int) (Math.random() * 30));
+        }
+        System.out.println(hashTable);
+        System.out.println(hashTable1);
+
+        System.out.println(hashTable.contains(3));
+
+        Integer[] array = new Integer[40];
+        for (int i = 0; i < 40; i++) {
+            array[i] = 24 * (i + 5);
+        }
+        System.out.println(Arrays.toString(array));
+        hashTable.toArray(array);
+        System.out.println(Arrays.toString(array));
+
+        System.out.println(hashTable.containsAll(hashTable1));
+        System.out.println(hashTable.addAll(hashTable1));
+        System.out.println(hashTable.containsAll(hashTable1));
+        System.out.println(hashTable.size());
+        System.out.println(hashTable.size() - hashTable1.size());
+        System.out.println(hashTable.removeAll(hashTable1));
+        System.out.println(hashTable.size());
         System.out.println(hashTable);
     }
 }

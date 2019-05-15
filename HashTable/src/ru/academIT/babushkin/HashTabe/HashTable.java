@@ -58,7 +58,7 @@ public class HashTable<E> implements Collection<E> {
                     throw new NoSuchElementException("Нет такого элемента");
                 }
                 if (initialModCount != modCount) {
-                    throw new ConcurrentModificationException("Произошло изменение во время обхода коллекции");
+                    throw new ConcurrentModificationException("Произошло изменение коллекции во время обхода");
                 }
                 if (items[currentArrayIndex] == null || items[currentArrayIndex].size() - 1 == currentItemIndex) {
                     currentItemIndex = -1;
@@ -115,10 +115,10 @@ public class HashTable<E> implements Collection<E> {
         //noinspection unchecked
         int key = getKey((E) o);
         if (items[key] != null) {
+            size--;
+            modCount++;
             return items[key].remove(o);
         }
-        size--;
-        modCount++;
         return false;
     }
 
@@ -149,7 +149,7 @@ public class HashTable<E> implements Collection<E> {
         int modCount = this.modCount;
         for (Object o : c) {
             int key = getKey((E) o);
-            while (items[key].remove(o)) {
+            while (items[key] != null && items[key].remove(o)) {
                 size--;
                 this.modCount++;
             }
@@ -159,16 +159,25 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        int modCount = this.modCount;
-        for (E e : this) {
-            if (!c.contains(e)) {
+        int size = 0;
+        for (LinkedList<E> list : items) {
+            if (list != null) {
+                if (list.retainAll(c)) {
+                    modCount++;
+                }
+                size += list.size();
             }
         }
-        return modCount != this.modCount;
+        return size != this.size;
     }
 
     @Override
     public void clear() {
+        for (int i = 0; i < items.length; i++) {
+            items[i] = null;
+        }
+        size = 0;
+        modCount++;
     }
 
     @Override
