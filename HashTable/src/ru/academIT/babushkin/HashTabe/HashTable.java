@@ -113,11 +113,15 @@ public class HashTable<E> implements Collection<E> {
     @Override
     public boolean remove(Object o) {
         //noinspection unchecked
+        LinkedList<E> current
         int key = getKey((E) o);
-        if (items[key] != null) {
+        if (items[key] != null && items[key].remove(o)) {
+            if (items[key].size() == 0) {
+                items[key] = null;
+            }
             size--;
             modCount++;
-            return items[key].remove(o);
+            return true;
         }
         return false;
     }
@@ -150,6 +154,9 @@ public class HashTable<E> implements Collection<E> {
         for (Object o : c) {
             int key = getKey((E) o);
             while (items[key] != null && items[key].remove(o)) {
+                if (items[key].size() == 0) {
+                    items[key] = null;
+                }
                 size--;
                 this.modCount++;
             }

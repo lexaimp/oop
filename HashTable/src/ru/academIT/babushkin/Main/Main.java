@@ -25,12 +25,11 @@ public class Main {
         hashTable.toArray(array);
         System.out.println(Arrays.toString(array));
 
-        System.out.println(hashTable.containsAll(hashTable1));
-        System.out.println(hashTable.addAll(hashTable1));
-        System.out.println(hashTable.containsAll(hashTable1));
+        System.out.println("Добавление 1 коллекции во 2: " + hashTable.addAll(hashTable1));
+        System.out.println("_______________________________");
+        System.out.println(hashTable);
         System.out.println(hashTable.size());
-        System.out.println(hashTable.size() - hashTable1.size());
-        System.out.println(hashTable.removeAll(hashTable1));
+        System.out.println("removeAll" + hashTable.removeAll(hashTable1));
         System.out.println(hashTable.size());
         System.out.println(hashTable);
     }
