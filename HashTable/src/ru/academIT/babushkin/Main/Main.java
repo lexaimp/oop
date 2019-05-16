@@ -27,9 +27,10 @@ public class Main {
 
         System.out.println("Добавление 1 коллекции во 2: " + hashTable.addAll(hashTable1));
         System.out.println("_______________________________");
-        System.out.println(hashTable);
+        System.out.println("hashTable: " + hashTable);
         System.out.println(hashTable.size());
-        System.out.println("removeAll" + hashTable.removeAll(hashTable1));
+        System.out.println("hashTable1: " + hashTable1);
+        System.out.println("retainAll: " + hashTable.retainAll(hashTable1));
         System.out.println(hashTable.size());
         System.out.println(hashTable);
     }

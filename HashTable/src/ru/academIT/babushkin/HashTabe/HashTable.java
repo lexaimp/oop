@@ -113,7 +113,6 @@ public class HashTable<E> implements Collection<E> {
     @Override
     public boolean remove(Object o) {
         //noinspection unchecked
-        LinkedList<E> current
         int key = getKey((E) o);
         if (items[key] != null && items[key].remove(o)) {
             if (items[key].size() == 0) {
@@ -168,14 +167,21 @@ public class HashTable<E> implements Collection<E> {
     public boolean retainAll(Collection<?> c) {
         int size = 0;
         for (LinkedList<E> list : items) {
+            if (list != null && list.retainAll(c)) {
+                modCount++;
+            }
             if (list != null) {
-                if (list.retainAll(c)) {
-                    modCount++;
-                }
                 size += list.size();
+                if (list.size() == 0) {
+                    list = null;
+                }
             }
         }
-        return size != this.size;
+        if (size == this.size) {
+            return false;
+        }
+        this.size = size;
+        return true;
     }
 
     @Override
