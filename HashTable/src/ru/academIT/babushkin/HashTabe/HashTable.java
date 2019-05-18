@@ -166,14 +166,14 @@ public class HashTable<E> implements Collection<E> {
     @Override
     public boolean retainAll(Collection<?> c) {
         int size = 0;
-        for (LinkedList<E> list : items) {
-            if (list != null && list.retainAll(c)) {
-                modCount++;
-            }
-            if (list != null) {
-                size += list.size();
-                if (list.size() == 0) {
-                    list = null;
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                if (items[i].retainAll(c)) {
+                    modCount++;
+                }
+                size += items[i].size();
+                if (items[i].size() == 0) {
+                    items[i] = null;
                 }
             }
         }
