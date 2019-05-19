@@ -1,6 +1,6 @@
 package ru.academIT.babushkin.Main;
 
-import ru.academIT.babushkin.HashTabe.HashTable;
+import ru.academIT.babushkin.HashTable.HashTable;
 
 import java.util.Arrays;
 
@@ -33,5 +33,7 @@ public class Main {
         System.out.println("retainAll: " + hashTable.retainAll(hashTable1));
         System.out.println(hashTable.size());
         System.out.println(hashTable);
+
+        System.out.println("_______________________________");
     }
 }

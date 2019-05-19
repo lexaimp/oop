@@ -1,4 +1,18 @@
-package ru.academIT.babushkin.HashTabe;
+//1. Опечатка в имени пакета +
+//
+//2. Сейчас допускается вместимость 0, но тогда ничего не удастся вставить +
+//
+//3. Лучше сделать, чтобы getKey принимал Object.+
+//И тогда убрать лишние глушения warning'ов +
+//
+//4. Коллекция должна нормально работать с null данными
+//
+//5. iterator-  warning при объявлении.
+//И стоит TODO, если все сделано, то нужно убрать +
+//
+//6. removeAll - можно использовать свой remove
+
+package ru.academIT.babushkin.HashTable;
 
 import java.util.*;
 
@@ -14,6 +28,9 @@ public class HashTable<E> implements Collection<E> {
 
     @SuppressWarnings("unchecked")
     public HashTable(int capacity) {
+        if (capacity < 1) {
+            throw new IllegalArgumentException("Вместимость не может быть меньше 1");
+        }
         items = new LinkedList[capacity];
     }
 
@@ -27,14 +44,13 @@ public class HashTable<E> implements Collection<E> {
         return size == 0;
     }
 
-    private int getKey(E element) {
-        return Math.abs(element.hashCode() % items.length);
+    private int getKey(Object obj) {
+        return Math.abs(obj.hashCode() % items.length);
     }
 
     @Override
     public boolean contains(Object o) {
-        //noinspection unchecked
-        int key = getKey((E) o);
+        int key = getKey(o);
         return items[key] != null && items[key].contains(o);
     }
 
@@ -111,8 +127,7 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean remove(Object o) {
-        //noinspection unchecked
-        int key = getKey((E) o);
+        int key = getKey(o);
         if (items[key] != null && items[key].remove(o)) {
             if (items[key].size() == 0) {
                 items[key] = null;
@@ -145,12 +160,12 @@ public class HashTable<E> implements Collection<E> {
         return true;
     }
 
-    @SuppressWarnings({"SuspiciousMethodCalls", "unchecked"})
+    @SuppressWarnings("SuspiciousMethodCalls")
     @Override
     public boolean removeAll(Collection<?> c) {
         int modCount = this.modCount;
         for (Object o : c) {
-            int key = getKey((E) o);
+            int key = getKey(o);
             while (items[key] != null && items[key].remove(o)) {
                 if (items[key].size() == 0) {
                     items[key] = null;
