@@ -4,6 +4,8 @@ import ru.academIT.babushkin.Lambda.Person;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -37,5 +39,18 @@ public class Main {
                 .forEachOrdered(person -> stringBuilder.append(person.getName()).append(", "));
         stringBuilder.setLength(stringBuilder.length() - 2);
         System.out.println(stringBuilder);
+
+        //task2 endlessNumbersStream
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("count of elements: ");
+        DoubleStream squares = DoubleStream.iterate(0, x -> x + 1)
+                .map(Math::sqrt).limit(scanner.nextInt());
+        squares.forEach(System.out::println);
+
+        //endlessNumbersStreamFibonacci
+        IntStream.iterate(0, x -> x + 1)
+                .map(x -> (int) (Math.pow((1 + Math.sqrt(5)) / 2, x) / Math.sqrt(5) + 0.5))
+                .limit(30)
+                .forEach(System.out::println);
     }
 }

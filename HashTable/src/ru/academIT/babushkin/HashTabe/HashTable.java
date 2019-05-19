@@ -51,7 +51,6 @@ public class HashTable<E> implements Collection<E> {
                 return currentNodeCount < size;
             }
 
-            //todo
             @Override
             public E next() {
                 if (!hasNext()) {
