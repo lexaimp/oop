@@ -5,7 +5,7 @@
 //3. Лучше сделать, чтобы getKey принимал Object.+
 //И тогда убрать лишние глушения warning'ов +
 //
-//4. Коллекция должна нормально работать с null данными
+//4. Коллекция должна нормально работать с null данными +
 //
 //5. iterator-  warning при объявлении.
 //И стоит TODO, если все сделано, то нужно убрать +
@@ -50,6 +50,9 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean contains(Object o) {
+        if (o == null) {
+            return false;
+        }
         int key = getKey(o);
         return items[key] != null && items[key].contains(o);
     }
@@ -103,6 +106,9 @@ public class HashTable<E> implements Collection<E> {
     @SuppressWarnings({"unchecked", "SuspiciousSystemArraycopy"})
     @Override
     public <T> T[] toArray(T[] a) {
+        if (a == null) {
+            throw new NullPointerException("Передаваемый массив не может быть null");
+        }
         if (size > a.length) {
             return (T[]) Arrays.copyOf(toArray(), size, a.getClass());
         }
@@ -115,6 +121,9 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean add(E e) {
+        if (e == null) {
+            throw new NullPointerException("Передаваемый объект не может быть null");
+        }
         int key = getKey(e);
         if (items[key] == null) {
             items[key] = new LinkedList<>();
@@ -127,6 +136,9 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean remove(Object o) {
+        if (o == null) {
+            throw new NullPointerException("Передаваемый объект не может быть null");
+        }
         int key = getKey(o);
         if (items[key] != null && items[key].remove(o)) {
             if (items[key].size() == 0) {
@@ -141,6 +153,9 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
+        if (c == null) {
+            throw new NullPointerException("Передаваемая коллекция не может быть null.");
+        }
         for (Object o : c) {
             if (!contains(o)) {
                 return false;
@@ -151,6 +166,9 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
+        if (c == null) {
+            throw new NullPointerException("Передаваемая коллекция не может быть null.");
+        }
         if (c.isEmpty()) {
             return false;
         }
@@ -163,6 +181,9 @@ public class HashTable<E> implements Collection<E> {
     @SuppressWarnings("SuspiciousMethodCalls")
     @Override
     public boolean removeAll(Collection<?> c) {
+        if (c == null) {
+            throw new NullPointerException("Передаваемая коллекция не может быть null.");
+        }
         int modCount = this.modCount;
         for (Object o : c) {
             int key = getKey(o);
@@ -179,6 +200,9 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
+        if (c == null) {
+            throw new NullPointerException("Передаваемая коллекция не может быть null.");
+        }
         int size = 0;
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {

@@ -35,5 +35,7 @@ public class Main {
         System.out.println(hashTable);
 
         System.out.println("_______________________________");
+        System.out.println("hashtable1 " + hashTable1);
+        System.out.println(hashTable1.contains(null));
     }
 }
