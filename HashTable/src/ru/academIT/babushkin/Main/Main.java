@@ -30,7 +30,7 @@ public class Main {
         System.out.println("hashTable: " + hashTable);
         System.out.println(hashTable.size());
         System.out.println("hashTable1: " + hashTable1);
-        System.out.println("retainAll: " + hashTable.retainAll(hashTable1));
+        System.out.println("remove: " + hashTable.removeAll(hashTable1));
         System.out.println(hashTable.size());
         System.out.println(hashTable);
 

@@ -178,7 +178,6 @@ public class HashTable<E> implements Collection<E> {
         return true;
     }
 
-    @SuppressWarnings("SuspiciousMethodCalls")
     @Override
     public boolean removeAll(Collection<?> c) {
         if (c == null) {
@@ -186,14 +185,7 @@ public class HashTable<E> implements Collection<E> {
         }
         int modCount = this.modCount;
         for (Object o : c) {
-            int key = getKey(o);
-            while (items[key] != null && items[key].remove(o)) {
-                if (items[key].size() == 0) {
-                    items[key] = null;
-                }
-                size--;
-                this.modCount++;
-            }
+            while (remove(o));
         }
         return modCount != this.modCount;
     }
