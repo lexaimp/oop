@@ -1,17 +1,3 @@
-//1. Опечатка в имени пакета +
-//
-//2. Сейчас допускается вместимость 0, но тогда ничего не удастся вставить +
-//
-//3. Лучше сделать, чтобы getKey принимал Object.+
-//И тогда убрать лишние глушения warning'ов +
-//
-//4. Коллекция должна нормально работать с null данными +
-//
-//5. iterator-  warning при объявлении.
-//И стоит TODO, если все сделано, то нужно убрать +
-//
-//6. removeAll - можно использовать свой remove
-
 package ru.academIT.babushkin.HashTable;
 
 import java.util.*;
@@ -185,7 +171,8 @@ public class HashTable<E> implements Collection<E> {
         }
         int modCount = this.modCount;
         for (Object o : c) {
-            while (remove(o));
+            //noinspection StatementWithEmptyBody
+            while (remove(o)) ;
         }
         return modCount != this.modCount;
     }
