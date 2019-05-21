@@ -24,8 +24,8 @@ public class Main {
         System.out.println(names);
 
         OptionalDouble averageAge = peoples.stream()
+                .filter(x -> x.getAge() < 18)
                 .mapToInt(Person::getAge)
-                .filter(x -> x < 18)
                 .average();
         System.out.println(averageAge);
 
