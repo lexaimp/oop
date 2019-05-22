@@ -31,14 +31,14 @@ public class HashTable<E> implements Collection<E> {
     }
 
     private int getKey(Object obj) {
+        if (obj == null) {
+            return 0;
+        }
         return Math.abs(obj.hashCode() % items.length);
     }
 
     @Override
     public boolean contains(Object o) {
-        if (o == null) {
-            return false;
-        }
         int key = getKey(o);
         return items[key] != null && items[key].contains(o);
     }
@@ -107,9 +107,6 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean add(E e) {
-        if (e == null) {
-            throw new NullPointerException("Передаваемый объект не может быть null");
-        }
         int key = getKey(e);
         if (items[key] == null) {
             items[key] = new LinkedList<>();
@@ -122,9 +119,6 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean remove(Object o) {
-        if (o == null) {
-            throw new NullPointerException("Передаваемый объект не может быть null");
-        }
         int key = getKey(o);
         if (items[key] != null && items[key].remove(o)) {
             if (items[key].size() == 0) {
