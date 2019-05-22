@@ -13,9 +13,9 @@ public class Main {
         peoples.add(new Person("Коля", 30));
         peoples.add(new Person("Оля", 30));
         peoples.add(new Person("Коля", 72));
-        peoples.add(new Person("Петя", 10));
+        peoples.add(new Person("Петя", 19));
         peoples.add(new Person("Максим", 23));
-        peoples.add(new Person("Светлана", 17));
+        peoples.add(new Person("Светлана", 31));
 
         String names = peoples.stream()
                 .map(Person::getName)
@@ -27,7 +27,7 @@ public class Main {
                 .filter(x -> x.getAge() < 18)
                 .mapToInt(Person::getAge)
                 .average();
-        System.out.println(averageAge);
+        System.out.println(averageAge.isPresent() ? averageAge.getAsDouble() : 0);
 
         Map<String, Double> map = peoples.stream()
                 .collect(Collectors.groupingBy(Person::getName, Collectors.averagingDouble(Person::getAge)));
