@@ -15,7 +15,7 @@ public class Main {
         peoples.add(new Person("Коля", 72));
         peoples.add(new Person("Петя", 19));
         peoples.add(new Person("Максим", 23));
-        peoples.add(new Person("Светлана", 31));
+        peoples.add(new Person("Светлана", 311));
 
         String names = peoples.stream()
                 .map(Person::getName)
