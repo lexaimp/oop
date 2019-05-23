@@ -45,7 +45,7 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
+        return new Iterator<>() {
             private int initialModCount = modCount;
             private int currentNodeCount = 0;
             private int currentArrayIndex = 0;
