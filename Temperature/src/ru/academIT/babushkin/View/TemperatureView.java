@@ -2,18 +2,20 @@ package ru.academIT.babushkin.View;
 
 import javax.swing.*;
 
+import static javax.swing.GroupLayout.Alignment.LEADING;
+
 public class TemperatureView extends JFrame {
 
-    public TemperatureView(int width, int height, String title) {
-        this.setSize(width, height);
-        this.setTitle(title);
-        this.setLayout(new GroupLayout(this));
-    }
+    public TemperatureView(String title) {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle(title);
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        layout.setHorizontalGroup(layout.createSequentialGroup()
+                .addComponent(new JLabel("Temperature")).addGroup(layout.createParallelGroup(LEADING)));
 
-    private GroupLayout getGroupLayout() {
-        GroupLayout groupLayout = new GroupLayout(this);
-        groupLayout.setHorizontalGroup(label());
-        return groupLayout;
     }
 
     private JLabel label() {
