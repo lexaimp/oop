@@ -58,11 +58,11 @@ public class TemperatureView extends JFrame {
 
             private void IntegerInspection() {
                 try {
-                    Integer.parseInt(field.getText());
+                    Double.parseDouble(field.getText());
                     errorLabel.setVisible(false);
                     button.setEnabled(true);
                 } catch (NumberFormatException exception) {
-                    errorLabel.setText("Введите целое число");
+                    errorLabel.setText("Введите число");
                     errorLabel.setVisible(true);
                     button.setEnabled(false);
 
