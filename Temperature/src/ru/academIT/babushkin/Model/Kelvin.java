@@ -1,7 +1,7 @@
 package ru.academIT.babushkin.Model;
 
 public class Kelvin implements Temperature {
-    private static final Unit name = Unit.KELVIN;
+    private static final String name = "Kelvin";
     private double temperature = 0;
 
     public void setTemperature(double temperature) {
@@ -9,7 +9,7 @@ public class Kelvin implements Temperature {
     }
 
     @Override
-    public Unit getName() {
+    public String getName() {
         return name;
     }
 

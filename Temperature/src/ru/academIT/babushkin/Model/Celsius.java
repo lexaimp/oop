@@ -1,7 +1,7 @@
 package ru.academIT.babushkin.Model;
 
 public class Celsius implements Temperature {
-    private static final Unit name = Unit.CELSIUS;
+    private static final String name = "Celsius";
     private double temperature = 0;
 
     public void setTemperature(double temperature) {
@@ -9,7 +9,7 @@ public class Celsius implements Temperature {
     }
 
     @Override
-    public Unit getName() {
+    public String getName() {
         return name;
     }
 

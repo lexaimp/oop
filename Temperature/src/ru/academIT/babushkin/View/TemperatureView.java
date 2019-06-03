@@ -14,8 +14,8 @@ public class TemperatureView extends JFrame {
         setTitle(title);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        int width = 500;
-        int height = 180;
+        int width = 700;
+        int height = 150;
         setSize(width, height);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(screenSize.width / 2 - width / 2, screenSize.height / 2 - height / 2);
@@ -77,7 +77,9 @@ public class TemperatureView extends JFrame {
         panelWithErrorLabel.setLayout(new GridBagLayout());
         panelWithErrorLabel.add(errorLabel, constraints);
         centralPanel.add(panelWithErrorLabel);
-        centralPanel.add(new JPanel().add(button));
+        JPanel panelWithButton = new JPanel();
+        panelWithButton.add(button);
+        centralPanel.add(panelWithButton);
 
         add(inputPanel);
         add(centralPanel);
