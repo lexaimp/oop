@@ -7,10 +7,8 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 
 public class TemperatureView extends JFrame {
-    private String[] temperatureUnits; // Массив для хранения наименования едениц измерения
 
     public TemperatureView(String title, String[] temperatureUnits) {
-        this.temperatureUnits = temperatureUnits;
         setTitle(title);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,16 +71,25 @@ public class TemperatureView extends JFrame {
 
         JPanel centralPanel = new JPanel();
         centralPanel.setLayout(new GridLayout(2, 1));
+
         JPanel panelWithErrorLabel = new JPanel();
-        panelWithErrorLabel.setLayout(new GridBagLayout());
-        panelWithErrorLabel.add(errorLabel, constraints);
+        panelWithErrorLabel.add(errorLabel);
         centralPanel.add(panelWithErrorLabel);
+
         JPanel panelWithButton = new JPanel();
         panelWithButton.add(button);
         centralPanel.add(panelWithButton);
 
+        JTextField textFieldForPrintOutput = new JTextField();
+        textFieldForPrintOutput.setEditable(false);
+
+        JPanel outputPanel = new JPanel();
+        outputPanel.setLayout(new GridBagLayout());
+        outputPanel.add(textFieldForPrintOutput, constraints);
+        outputPanel.add(new JComboBox<>(temperatureUnits), constraints);
+
         add(inputPanel);
         add(centralPanel);
-        add(new JPanel());
+        add(outputPanel);
     }
 }

@@ -1,9 +1,9 @@
 package ru.academIT.babushkin.Model;
 
 public interface Temperature {
-    public String getName();
+    String getName();
 
-    public double toCelsius();
+    double toCelsius(double inputValue);
 
-    public double fromCelsius();
+    double fromCelsius(double outputValue);
 }

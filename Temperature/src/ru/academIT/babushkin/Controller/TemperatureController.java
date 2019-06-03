@@ -1,21 +1,31 @@
 package ru.academIT.babushkin.Controller;
 
 import ru.academIT.babushkin.Model.Celsius;
-
-import java.util.ArrayList;
+import ru.academIT.babushkin.Model.Fahrenheit;
+import ru.academIT.babushkin.Model.Kelvin;
+import ru.academIT.babushkin.Model.Temperature;
 
 public class TemperatureController {
-    private String[] temperatureUnits = {new Celsius(), };
+    private Temperature[] temperatureUnits = {new Celsius(), new Fahrenheit(), new Kelvin()};
 
-    public ArrayList getTemperatureUnits() {
-        return temperatureUnits;
+    public double convert(double value, String from, String to) {
+        return findUnit(from).toCelsius(findUnit(to).fromCelsius(value));
     }
 
-    public void addUnit(Object unit) {
-        temperatureUnits.add(unit);
+    private Temperature findUnit(String unit) {
+        for (Temperature u : temperatureUnits) {
+            if (u.getName().equals(unit)) {
+                return u;
+            }
+        }
+        return null;
     }
 
-    public void setUnits(String temperatureUnit) {
-
+    public String[] toArray() {
+        String[] namesArray = new String[temperatureUnits.length];
+        for (int i = 0; i < namesArray.length; i++) {
+            namesArray[i] = temperatureUnits[i].getName();
+        }
+        return namesArray;
     }
 }
