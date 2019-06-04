@@ -1,5 +1,7 @@
 package ru.academIT.babushkin.View;
 
+import ru.academIT.babushkin.Controller.TemperatureController;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -8,7 +10,8 @@ import java.awt.*;
 
 public class TemperatureView extends JFrame {
 
-    public TemperatureView(String title, String[] temperatureUnits) {
+    public TemperatureView(String title, TemperatureController temperatureController) {
+
         setTitle(title);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,7 +70,8 @@ public class TemperatureView extends JFrame {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
         inputPanel.add(textFieldForGetDouble, constraints);
-        inputPanel.add(new JComboBox<>(temperatureUnits), constraints);
+        JComboBox fromBox = new JComboBox<>(temperatureController.toArray());
+        inputPanel.add(fromBox, constraints);
 
         JPanel centralPanel = new JPanel();
         centralPanel.setLayout(new GridLayout(2, 1));
@@ -86,10 +90,20 @@ public class TemperatureView extends JFrame {
         JPanel outputPanel = new JPanel();
         outputPanel.setLayout(new GridBagLayout());
         outputPanel.add(textFieldForPrintOutput, constraints);
-        outputPanel.add(new JComboBox<>(temperatureUnits), constraints);
+        JComboBox toBox = new JComboBox<>(temperatureController.toArray());
+        outputPanel.add(toBox, constraints);
 
         add(inputPanel);
         add(centralPanel);
         add(outputPanel);
+
+        button.addActionListener(e -> {
+            try {
+                    Double result = temperatureController.convert(fromBox.getSelectedItem().toString(), toBox.getSelectedItem().toString(), Double.parseDouble(textFieldForGetDouble.getText()));
+                    textFieldForPrintOutput.setText(result.toString());
+            } catch (NumberFormatException exception) {
+
+            }
+        });
     }
 }
