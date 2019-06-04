@@ -15,7 +15,7 @@ public class TemperatureController {
 
     private Temperature findUnit(String unit) {
         for (Temperature u : temperatureUnits) {
-            if (u.getName().equals(unit)) {
+            if (u.toString().equals(unit)) {
                 return u;
             }
         }
@@ -25,7 +25,7 @@ public class TemperatureController {
     public String[] toArray() {
         String[] namesArray = new String[temperatureUnits.length];
         for (int i = 0; i < namesArray.length; i++) {
-            namesArray[i] = temperatureUnits[i].getName();
+            namesArray[i] = temperatureUnits[i].toString();
         }
         return namesArray;
     }

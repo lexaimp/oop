@@ -12,7 +12,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        TemperatureController temperatureController = new TemperatureController(new Temperature[]{new Celsius(), new Fahrenheit(), new Kelvin()});
-        SwingUtilities.invokeLater(() -> new TemperatureView("Temperature converter", temperatureController).setVisible(true));
+        Temperature[] temperatures = {new Celsius(), new Fahrenheit(), new Kelvin()};
+        SwingUtilities.invokeLater(() -> new TemperatureView("Temperature converter", new TemperatureController(temperatures)).setVisible(true));
     }
 }

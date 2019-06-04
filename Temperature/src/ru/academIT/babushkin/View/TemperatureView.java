@@ -62,7 +62,6 @@ public class TemperatureView extends JFrame {
                     errorLabel.setText("Введите числовое значение");
                     errorLabel.setVisible(true);
                     button.setEnabled(false);
-
                 }
             }
         });
@@ -96,11 +95,11 @@ public class TemperatureView extends JFrame {
         add(inputPanel);
         add(centralPanel);
         add(outputPanel);
-
+//        todo Выполнить проверку на нажетие кнопи без ввода текста в поле ввода температуры
         button.addActionListener(e -> {
             try {
-                    Double result = temperatureController.convert(fromBox.getSelectedItem().toString(), toBox.getSelectedItem().toString(), Double.parseDouble(textFieldForGetDouble.getText()));
-                    textFieldForPrintOutput.setText(result.toString());
+                double result = temperatureController.convert((String) fromBox.getSelectedItem(), (String) toBox.getSelectedItem(), Double.parseDouble(textFieldForGetDouble.getText()));
+                textFieldForPrintOutput.setText(String.valueOf(result));
             } catch (NumberFormatException exception) {
 
             }

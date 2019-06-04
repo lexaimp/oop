@@ -4,11 +4,6 @@ public class Celsius implements Temperature {
     private static final String name = "Celsius";
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
     public double toCelsius(double inputValue) {
         return inputValue;
     }
@@ -16,5 +11,10 @@ public class Celsius implements Temperature {
     @Override
     public double fromCelsius(double outputValue) {
         return outputValue;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
