@@ -10,7 +10,12 @@ public class TemperatureController {
     }
 
     public double convert(String from, String to, double value) {
-        return findUnit(to).fromCelsius(findUnit(from).toCelsius(value));
+        Temperature unitFrom = findUnit(from);
+        Temperature unitTo = findUnit(to);
+        if (unitFrom == null || unitTo == null) {
+            return 0;
+        }
+        return unitTo.fromCelsius(unitFrom.toCelsius(value));
     }
 
     private Temperature findUnit(String unit) {

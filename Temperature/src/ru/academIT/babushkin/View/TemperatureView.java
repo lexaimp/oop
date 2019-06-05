@@ -68,6 +68,7 @@ public class TemperatureView extends JFrame {
 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
+        inputPanel.add(new JLabel("Поле ввода"), constraints);
         inputPanel.add(textFieldForGetDouble, constraints);
         JComboBox fromBox = new JComboBox<>(temperatureController.toArray());
         inputPanel.add(fromBox, constraints);
@@ -88,6 +89,7 @@ public class TemperatureView extends JFrame {
 
         JPanel outputPanel = new JPanel();
         outputPanel.setLayout(new GridBagLayout());
+        outputPanel.add(new JLabel("Результат"), constraints);
         outputPanel.add(textFieldForPrintOutput, constraints);
         JComboBox toBox = new JComboBox<>(temperatureController.toArray());
         outputPanel.add(toBox, constraints);
@@ -95,13 +97,13 @@ public class TemperatureView extends JFrame {
         add(inputPanel);
         add(centralPanel);
         add(outputPanel);
-//        todo Выполнить проверку на нажетие кнопи без ввода текста в поле ввода температуры
         button.addActionListener(e -> {
             try {
                 double result = temperatureController.convert((String) fromBox.getSelectedItem(), (String) toBox.getSelectedItem(), Double.parseDouble(textFieldForGetDouble.getText()));
                 textFieldForPrintOutput.setText(String.valueOf(result));
             } catch (NumberFormatException exception) {
-
+                errorLabel.setText("Введите значение в поле ввода");
+                errorLabel.setVisible(true);
             }
         });
     }
