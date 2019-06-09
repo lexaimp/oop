@@ -2,8 +2,6 @@
 
 import javax.swing.*;
 
-import java.util.ArrayList;
-
 import static javax.swing.GroupLayout.Alignment.*;
 
 public class GroupLayoutTest extends JFrame {
