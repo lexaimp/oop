@@ -42,20 +42,20 @@ public class TemperatureView {
             textFieldForGetDouble.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                    IntegerInspection();
+                    inspectionOnDouble();
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                    IntegerInspection();
+                    inspectionOnDouble();
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    IntegerInspection();
+                    inspectionOnDouble();
                 }
 
-                private void IntegerInspection() {
+                private void inspectionOnDouble() {
                     try {
                         Double.parseDouble(textFieldForGetDouble.getText());
                         errorLabel.setVisible(false);
