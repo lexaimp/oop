@@ -1,6 +1,6 @@
 package ru.academIT.babushkin.Matrix;
 
-import ru.academIT.babushkin.Vector.*;
+import ru.academIT.babushkin.Vector.Vector;
 
 public class Matrix{
     private Vector[] rows;
