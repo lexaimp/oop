@@ -1,7 +1,7 @@
 package ru.academIT.babushkin.Model;
 
 public class Celsius implements Temperature {
-    private static final String name = "Celsius";
+    private static final String name = "Цельсий";
 
     @Override
     public double toCelsius(double inputValue) {
