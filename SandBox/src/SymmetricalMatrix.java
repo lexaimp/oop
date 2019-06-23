@@ -1,4 +1,3 @@
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class SymmetricalMatrix implements Serializable {
@@ -10,8 +9,9 @@ public class SymmetricalMatrix implements Serializable {
             throw new IllegalArgumentException("Размерность матрицы не может быть меньше 1");
         }
         this.matrix = new int[dimension][dimension];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
+        for (int i = 0; i <= matrix.length; i++) {
+            int countDifferentsValueInRow = 1;
+            for (int j = 0; j < matrix[i].length ; j++) {
                 int value = (int) (Math.random() * 25);
                 matrix[i][j] = value;
                 matrix[matrix.length - 1 - i][matrix[matrix.length - 1 - i].length - 1 - j] = value;
@@ -19,9 +19,14 @@ public class SymmetricalMatrix implements Serializable {
         }
     }
 
-    private void writeObject(ObjectOutputStream out) {
-
-    }
+//    private void writeObject(ObjectOutputStream out) throws IOException {
+//        out.writeInt(matrix.length);
+//        for (int i = 0; i < matrix.length / 2; i++) {
+//            for (){
+//
+//            }
+//        }
+//    }
 
     @Override
     public String toString() {
